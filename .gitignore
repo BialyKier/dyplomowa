@@ -1,0 +1,46 @@
+
+
+
+
+
+# nextjs
+
+# dependencies
+nextjs/wwwnextjs/node_modules
+nextjs/wwwnextjs/.pnp
+nextjs/wwwnextjs/.pnp.*
+nextjs/wwwnextjs/.yarn/*
+nextjs/wwwnextjs/!.yarn/patches
+nextjs/wwwnextjs/!.yarn/plugins
+nextjs/wwwnextjs/!.yarn/releases
+nextjs/wwwnextjs/!.yarn/versions
+
+# testing
+nextjs/wwwnextjs/coverage
+
+# next.js
+nextjs/wwwnextjs/.next/
+nextjs/wwwnextjs/out/
+
+# production
+nextjs/wwwnextjs/build
+
+# misc
+nextjs/wwwnextjs/.DS_Store
+nextjs/wwwnextjs/*.pem
+
+# debug
+nextjs/wwwnextjs/npm-debug.log*
+nextjs/wwwnextjs/yarn-debug.log*
+nextjs/wwwnextjs/yarn-error.log*
+nextjs/wwwnextjs/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+nextjs/wwwnextjs/.env*
+
+# vercel
+nextjs/wwwnextjs/.vercel
+
+# typescript
+nextjs/wwwnextjs/*.tsbuildinfo
+nextjs/wwwnextjs/next-env.d.ts
