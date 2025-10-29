@@ -12,9 +12,12 @@ services:
         ports:
             - "80:80"
             - "443:443"
+            - "1337:1337"
         volumes:
             - ./public_html:/var/www/html
             - ./ssl:/etc/ssl/dyplomowa:ro
+        depends_on:
+            - srv-strapi
     srv-nextjs:
         container_name: srv-nextjs
         build:
@@ -26,15 +29,38 @@ services:
             - net-private
         volumes:
             - ./nextjs/wwwnextjs:/app
-#     srv-db:
-#         container_name: srv-db
-#         build:
-#             context: ./database
-#             dockerfile: Dockerfile
-#             image: img-db-srv
-#         networks:
-#             - net-private
-
+    srv-strapi:
+        container_name: srv-strapi
+        build:
+            context: ./strapi
+            dockerfile: Dockerfile
+        image: img-srv-strapi
+        networks:
+            - net-public
+            - net-private
+        volumes:
+            - ./strapi/wwwstrapi:/app
+        environment:
+            DATABASE_HOST: ${STRAPI_DATABASE_HOST}
+            DATABASE_NAME: ${STRAPI_POSTGRES_DB}
+            DATABASE_USERNAME: ${STRAPI_POSTGRES_USER}
+            DATABASE_PASSWORD: ${STRAPI_POSTGRES_PASSWORD}
+        depends_on:
+            - srv-strapi-db
+    srv-strapi-db:
+        container_name: ${STRAPI_DATABASE_HOST}
+        build:
+            context: ./database/dbstrapi
+            dockerfile: Dockerfile
+        image: img-db-srv
+        networks:
+            - net-private
+        volumes:
+            - ./database/dbstrapi/data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_DB: ${STRAPI_POSTGRES_DB}
+            POSTGRES_USER: ${STRAPI_POSTGRES_USER}
+            POSTGRES_PASSWORD: ${STRAPI_POSTGRES_PASSWORD}
 networks:
     net-public:
         driver: bridge
