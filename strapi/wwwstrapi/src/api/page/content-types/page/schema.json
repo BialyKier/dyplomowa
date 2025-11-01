@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Tytul": {
+      "type": "string",
+      "required": true
+    },
+    "Zajawka": {
+      "type": "text"
+    },
+    "Tresc": {
+      "type": "text"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Tytul",
+      "required": true
+    },
+    "Pozycja": {
+      "type": "integer",
+      "required": true,
+      "unique": true,
+      "min": 1
+    }
+  }
+}
