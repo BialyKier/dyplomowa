@@ -8,12 +8,27 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 
 # backup db
 
-docker exec -t srv-strapi-db ph_dumpall -U admin > database/dbstrapi/backup/backup.sql
+docker exec -t srv-strapi-db ph_dumpall -U admin > ./database/dbstrapi/backup/backup.sql
 
 
-docker exec -t srv-strapi-db pg_dump -U admin -d dyplomowa_db_strapi > backup.sql
+docker exec -t srv-strapi-db pg_dump -U admin -d dyplomowa_db_strapi > ./database/dbstrapi/backup/backup.sql
 
 
 
-docker exec -i srv-strapi-db psql -U admin -d dyplomowa_d
-b_strapi < backup.sql
+docker exec -i srv-strapi-db psql -U admin -d dyplomowa_db_strapi < ./database/dbstrapi/backup/backup.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+docker exec -it srv-strapi-db psql -U admin -d postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='dyplomowa_db_strapi';"
+docker exec -it srv-strapi-db psql -U admin -d postgres -c "DROP DATABASE dyplomowa_db_strapi;"
+docker exec -it srv-strapi-db psql -U admin -d postgres -c "CREATE DATABASE dyplomowa_db_strapi;"
