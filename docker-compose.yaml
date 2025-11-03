@@ -57,6 +57,7 @@ services:
             - net-private
         volumes:
             - ./database/dbstrapi/data:/var/lib/postgresql/data
+            - ./database/dbstrapi/backup:/backup
         environment:
             POSTGRES_DB: ${STRAPI_POSTGRES_DB}
             POSTGRES_USER: ${STRAPI_POSTGRES_USER}

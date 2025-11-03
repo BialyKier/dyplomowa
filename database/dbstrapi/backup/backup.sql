@@ -5959,4 +5959,3 @@ ALTER TABLE ONLY public.upload_folders
 --
 
 \unrestrict YmI4gCbzsXiW3kuAtxEsgRNIhBbMQlyFECDzPrOM42LqhzDhTf5CJ3AcdOS8Jds
-
