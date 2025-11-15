@@ -1,4 +1,6 @@
-import Menu from "../nav/Menu";
+import { DataBundleXYZ } from "@/types/types";
+import TopMenu from "../nav/TopMenu";
+
 
 
 
@@ -6,7 +8,7 @@ export default function Header() {
 
     return(
         <>
-        <Menu/>
+        <TopMenu />
         </>
     )
 }

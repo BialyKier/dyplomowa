@@ -26,9 +26,10 @@ services:
         image: img-srv-nextjs
         networks:
             - net-public
-            - net-private
         volumes:
             - ./nextjs/wwwnextjs:/app
+        environment:
+            PUBLIC_STRAPI_URL: ${PUBLIC_STRAPI_URL}
     srv-strapi:
         container_name: srv-strapi
         build:

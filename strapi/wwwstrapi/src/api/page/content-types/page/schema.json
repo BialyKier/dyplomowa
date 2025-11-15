@@ -4,33 +4,41 @@
   "info": {
     "singularName": "page",
     "pluralName": "pages",
-    "displayName": "page"
+    "displayName": "Strony"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Tytul": {
+    "tytul": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": false
     },
-    "Zajawka": {
-      "type": "text"
+    "zajawka": {
+      "type": "richtext"
     },
-    "Tresc": {
-      "type": "text"
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     },
-    "Slug": {
+    "slug": {
       "type": "uid",
-      "targetField": "Tytul",
+      "targetField": "tytul",
       "required": true
     },
-    "Pozycja": {
+    "pozycja": {
       "type": "integer",
       "required": true,
-      "unique": true,
-      "min": 1
+      "unique": true
+    },
+    "tresc": {
+      "type": "richtext"
     }
   }
 }

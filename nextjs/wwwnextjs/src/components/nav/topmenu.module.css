@@ -1,0 +1,10 @@
+.topmenu{}
+
+.topmenu > ul{
+display:flex;
+    list-style-type: none;
+}
+
+.topmenu > ul > li{
+padding:0 10px;
+}

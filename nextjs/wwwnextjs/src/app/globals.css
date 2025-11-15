@@ -1,4 +1,22 @@
-:root {
+
+body{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -39,4 +57,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
