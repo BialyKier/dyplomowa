@@ -1,7 +1,7 @@
 
 
 
-export type PageItem = {
+export type PageMenuItem = {
   id: number;
   tytul: string;
   slug: string;
@@ -9,24 +9,9 @@ export type PageItem = {
   url: string;
 };
 
-export type DataBundleXYZ = {
-    urlItems: PageItem[];
-}
+export type ContentPageTypeType = "page" | "post";
 
-// Type [[...web]] - routing
 
-export type WebProps = {
-  params: Promise<{ 
-    web: string[];
-  }>;
-};
- 
-// Types of function: getPageData.ts
-
-export type GetPageDataType = {
-    data: PageDataType[],
-    meta: PageMetaType
-}
 
 export type BannerType = {
         id: number,
@@ -50,19 +35,7 @@ export type BannerType = {
         publishedAt: string
     }
 
-export type PageDataType = {
-    id: number,
-    documentId: string,
-    createdAt: string,
-    updatedAt: string,
-    publishedAt: string,
-    tytul: string,
-    slug: string,
-    tresc: string,
-    zajawka: string,
-    pozycja: number,
-    banner: BannerType | null,
-}
+
 
 export type PageMetaType = {
     pagination: {
@@ -131,16 +104,55 @@ extended:{
         }
     }
 }
-export type DataExtended = GetPageDataType & ExtendUrlType & {}
+
 
 // Types of /pages
 
-export type MyOwnPagesType = {
-    bundle: DataExtended
-}
+
 
 
 export type HeroPropsType = {
     publicUrl: string,
-    bannerData: BannerType
+    bannerData: BannerType,
+    tytul: string
 }
+
+
+
+
+
+
+
+
+
+
+export type PageDataType = {
+    
+    id: number,
+    documentId: string,
+    createdAt: string,
+    updatedAt: string,
+    publishedAt: string,
+    tytul: string,
+    slug: string,
+    zajawka?: string,
+    tresc: string,
+    pozycja: number,
+    banner: BannerType | null,
+}
+
+export type PageDataValidatedType = PageDataType & {
+zajawka: string,
+}
+
+export type GetPageDataInType = {
+    data: PageDataType[],
+    meta: PageMetaType
+}
+
+export type GetPageDataOutType = {
+    data: PageDataValidatedType,
+    meta: PageMetaType
+}
+
+export type DataExtended = GetPageDataOutType & ExtendUrlType & {}

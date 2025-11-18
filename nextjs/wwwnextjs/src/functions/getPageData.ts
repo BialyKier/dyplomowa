@@ -1,85 +1,75 @@
-import { DataExtended, GetPageDataType, PageDataType, PageMetaType } from "@/types/types";
+import {
+  DataExtended,
+  GetPageDataInType,
+  PageDataType,
+  PageDataValidatedType,
+  PageMetaType,
+} from "@/types/types";
 
+const pageDataValidate = (x: PageDataType): PageDataValidatedType => {
+  return {
+    ...x,
+    tresc: x.tresc ?? "",
+    zajawka: typeof x.zajawka === "string" ? x.zajawka : "",
 
-const pageDataValidate = (x : PageDataType) : PageDataType => {
-   return {
-        ...x,
-        tresc: x.tresc ?? "",
-        banner: x.banner ? {
-            ...x.banner,
-            alternativeText: x.banner.alternativeText ?? ""
-        } : null
-  };
-}
-
-const pageMetaValidate = (x : PageMetaType) : PageMetaType => {
-    return{
-        pagination: x.pagination ?? {
-            page: 1,
-            pageSize: 25,
-            pageCount: 1,
-            total: 1
+    banner: x.banner
+      ? {
+          ...x.banner,
+          alternativeText: x.banner.alternativeText ?? "",
         }
-    }
-}
+      : null,
+  };
+};
 
-const getPageData = async (fetchUrl: string, PUBLIC_URL: string = process.env.PUBLIC_STRAPI_URL ||
-    'http://localhost:1337') : Promise<DataExtended | null> => {
+const pageMetaValidate = (x: PageMetaType): PageMetaType => {
+  return {
+    pagination: x.pagination ?? {
+      page: 1,
+      pageSize: 25,
+      pageCount: 1,
+      total: 1,
+    },
+  };
+};
 
-    const res = await fetch(fetchUrl);
+const getPageData = async (
+  fetchUrl: string,
+): Promise<DataExtended | null> => {
+  try {
+
+  const internalHost = process.env.PRIVATE_STRAPI_URL || "http://localhost:1337";
+    
+    // 2. ADRES PUBLICZNY (dla Przeglądarki)
+    const publicHost = process.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+    // Sklejamy URL do fetcha (używamy wewnętrznego!)
+    const fetchPath = `${internalHost}${fetchUrl}`;
+    const res = await fetch(fetchPath);
 
     if (!res.ok) return null;
 
-    const resData : GetPageDataType = await res.json();
+    const resData: GetPageDataInType = await res.json();
 
-    if (!resData.data?.[0]) return null;
-
+    if (!resData.data || resData.data.length === 0) return null;
 
     const dataValidated = pageDataValidate(resData.data[0]);
     const metaValidated = pageMetaValidate(resData.meta);
 
+    const public_banner_url = dataValidated.banner?.url
+      ? publicHost + dataValidated.banner?.url
+      : "";
 
-    const public_banner_url = resData?.data?.[0]?.banner?.url ? PUBLIC_URL+resData?.data?.[0]?.banner?.url : "";
-
-    const resDataExtended : DataExtended = { data: [dataValidated], meta: {...metaValidated}, extended:{banner:{public_banner_url}}}
+    const resDataExtended: DataExtended = {
+      data: dataValidated,
+      meta: metaValidated,
+      extended: { banner: { public_banner_url } },
+    };
 
     return resDataExtended;
-
-}
-
-
-
-
+  } catch (error) {
+    console.error("getPageData ERROR:", error);
+    throw error;
+  }
+};
 
 export default getPageData;
-
-
-
-
-
-
-
-
-// type GetBannerItemType = {
-//     data:[
-//         {
-//             banner:{
-//                 url: string,
-//                 alternativeText: string,
-//                 width: number,
-//                 height: number,
-//             }
-//         }
-//     ]
-// }
-
-// type BannerType = {
-//                 url: string,
-//                 alternativeText: string,
-//                 width: number,
-//                 height: number,
-// }
-
-// type BannerTypeComplete = {
-//     public_url: string
-// } & BannerType

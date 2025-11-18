@@ -1,48 +1,40 @@
-// /app/[slug]/page.tsx
-import React from 'react';
-import Image from 'next/image';
+"use client";
+import React, { useContext } from "react";
 
-import { notFound } from 'next/navigation';
+import HomePage from "@/components/pages/HomePage";
+import GenericPage from "@/components/pages/GenericPage";
+import BlogPage from "@/components/pages/BlogPage";
+import OnasPage from "@/components/pages/OnasPage";
+import KontaktPage from "@/components/pages/KontaktPage";
+import PostTemplate from "@/components/pages/PostTemplate";
 
-import getPageData from '@/functions/getPageData';
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
 
-import HomePage from '@/components/pages/HomePage';
-import GenericPage from '@/components/pages/GenericPage';
-import BlogPage from '@/components/pages/BlogPage';
-import OnasPage from '@/components/pages/OnasPage';
-import KontaktPage from '@/components/pages/KontaktPage';
+import { SlugContext } from "@/components/providers/ProviderSlug";
+import { PageTypeContext } from "@/components/providers/ProviderContentPageType";
 
-import { WebProps } from '@/types/types';
+const WebPage = () => {
+  const slug = useContext(SlugContext);
+  const ctype = useContext(PageTypeContext);
 
+  // map slug : component
+  const componentMap: Record<string, React.FC> = {
+    "home": HomePage,
+    "blog": BlogPage,
+    "o-nas": OnasPage,
+    "kontakt": KontaktPage,
+  };
 
-const WebPage = async (props: WebProps) => {
-  
-  const {web} = await props.params;
-  const slug = web?.join('/') || 'home';
-  
-  const generalData = await getPageData(`http://srv-strapi:1337/api/pages?filters[slug]=${slug}&populate=*`, process.env.PUBLIC_STRAPI_URL!);
-  
-  if (!generalData) return notFound();
-  
-  
+  const Component = ctype == "page" ? componentMap[slug] || GenericPage : PostTemplate;
 
-// mapowanie slug : komponent
-const componentMap: Record<string, React.FC<any>> = {
-  'home': HomePage,
-  'blog': BlogPage,
-  'o-nas': OnasPage,
-  'kontakt': KontaktPage
- 
-};
-
-const Component = componentMap[slug] || GenericPage;
-
-
-
-  // Dostęp do wartości slug: params.slug
   return (
     <>
-      <Component bundle={generalData}/>
+      <Header />
+      <main>
+        <Component />
+      </main>
+      <Footer />
     </>
   );
 };

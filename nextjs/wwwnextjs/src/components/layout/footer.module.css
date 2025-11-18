@@ -7,4 +7,6 @@
 
     background-color:gray;
     color:white;
+
+    flex-shrink:0;
 }

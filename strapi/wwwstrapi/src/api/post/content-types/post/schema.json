@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "pages",
+  "collectionName": "posts",
   "info": {
-    "singularName": "page",
-    "pluralName": "pages",
-    "displayName": "Strony"
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Wpisy"
   },
   "options": {
     "draftAndPublish": true
@@ -13,8 +13,7 @@
   "attributes": {
     "tytul": {
       "type": "string",
-      "required": true,
-      "unique": false
+      "required": true
     },
     "banner": {
       "type": "media",
@@ -29,17 +28,20 @@
       "targetField": "tytul",
       "required": true
     },
-    "pozycja": {
-      "type": "integer",
-      "required": true,
-      "unique": true
+    "zajawka": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     },
     "tresc": {
       "type": "customField",
       "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      }
+      },
+      "required": false
     }
   }
 }

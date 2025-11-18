@@ -1,10 +1,14 @@
-.topmenu{}
+.topmenu{
+    display: flex;
+    align-items: center;
+}
 
 .topmenu > ul{
-display:flex;
+    display:flex;
+    flex-direction: row;
     list-style-type: none;
 }
 
 .topmenu > ul > li{
-padding:0 10px;
+    padding:0 10px;
 }

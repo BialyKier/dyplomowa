@@ -1,18 +1,12 @@
-import { MyOwnPagesType } from "@/types/types";
-import Image from 'next/image';
 
 
-const HomePage = (props: MyOwnPagesType) => {
-
-
- return(
+const HomePage = () => {
+  return (
     <>
-    
-    <p>Strona domowa</p>
-    <p>Dane strony domowej:::: {props.bundle.data[0].tresc}</p>
+      <p>Strona domowa</p>
+      <p>Dane strony domowej:::: </p>
     </>
- )   
-}
-
+  );
+};
 
 export default HomePage;

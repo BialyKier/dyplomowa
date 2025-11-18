@@ -1,5 +1,6 @@
 export default () => ({
-     'strapi-plugin-tinymce': {
-    enabled: true,
-  },
+ tinymce:{
+      enabled:true
+    },
+
 });

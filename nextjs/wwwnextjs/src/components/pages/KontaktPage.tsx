@@ -1,17 +1,21 @@
-import { MyOwnPagesType } from "@/types/types";
+import Hero from "../hero/Hero";
+import { useGetContent } from "../hooks/useGetContent";
 
+const KontaktPage = () => {
+  const { banner, tresc, tytul, public_banner_url } = useGetContent();
 
-
-const KontaktPage = (props: MyOwnPagesType) => {
-
-
- return(
+  return (
     <>
-    <p>Strona Kontaktu</p>
-    <p>Dane strony Kontakt:::: {props.bundle.data[0].tresc}</p>
-    </>
- )   
-}
+      {banner && (
+        <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
+      )}
 
+      <p>Strona Kontaktu</p>
+      <p>Dane strony Kontakt:::: </p>
+     
+      {tresc}
+    </>
+  );
+};
 
 export default KontaktPage;
