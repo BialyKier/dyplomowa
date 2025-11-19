@@ -45,45 +45,7 @@ export type PageMetaType = {
         total: number
     }
 }
-
-export type FormatsInBannerType = {
-    large: {
-        ext: string,
-        url: string,
-        hash: string,
-        mime: string,
-        name: string,
-        path: string,
-        size: number,
-        width: number,
-        height: number,
-        sizeInBytes: number
-    },
-    small: {
-        ext: string,
-        url: string
-        hash: string,
-        mime: string,
-        name: string,
-        path: string,
-        size: number,
-        width: number,
-        height: number,
-        sizeInBytes: number
-    },
-    medium: {
-        ext: string,
-        url: string,
-        hash: string,
-        mime: string,
-        name: string,
-        path: string,
-        size: number,
-        width: number,
-        height: number,
-        sizeInBytes: number
-    },
-    thumbnail: {
+export type SingleFormatInBannerType = {
         ext: string,
         url: string,
         hash: string,
@@ -95,6 +57,12 @@ export type FormatsInBannerType = {
         height: number,
         sizeInBytes: number
     }
+
+export type FormatsInBannerType = {
+    large: SingleFormatInBannerType,
+    small: SingleFormatInBannerType,
+    medium: SingleFormatInBannerType,
+    thumbnail: SingleFormatInBannerType
 }
 
 export type ExtendUrlType = {
@@ -106,11 +74,6 @@ extended:{
 }
 
 
-// Types of /pages
-
-
-
-
 export type HeroPropsType = {
     publicUrl: string,
     bannerData: BannerType,
@@ -120,7 +83,21 @@ export type HeroPropsType = {
 
 
 
+export type LocalizationsObjectType = 
+    {
+        id: number,
+        documentId: string,
+        createdAt: string,
+        updatedAt: string,
+        publishedAt: string,
+        locale: string,
+        tytul: string,
+        slug: string,
+        pozycja:number,
+        tresc: string,
+    }
 
+    export type LocalizationsType = LocalizationsObjectType[]
 
 
 
@@ -136,14 +113,17 @@ export type PageDataType = {
     tytul: string,
     slug: string,
     zajawka?: string,
-    tresc: string,
+    tresc: string | null,
     pozycja: number,
     locale: string,
     banner: BannerType | null,
+    localizations: LocalizationsType | []
 }
 
-export type PageDataValidatedType = PageDataType & {
+export type PageDataValidatedType = Omit<PageDataType,'zajawka' | 'localizations'> & {
+tresc: string,
 zajawka: string,
+localizations: LocalizationsObjectType | null
 }
 
 export type GetPageDataInType = {

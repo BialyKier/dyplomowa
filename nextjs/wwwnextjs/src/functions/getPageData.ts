@@ -1,20 +1,24 @@
 import {
+  BannerType,
   DataExtended,
   GetPageDataInType,
   PageDataType,
   PageDataValidatedType,
   PageMetaType,
 } from "@/types/types";
+import vars from "@/vars/vars";
 
 const pageDataValidate = (x: PageDataType): PageDataValidatedType => {
   return {
     ...x,
     tresc: x.tresc ?? "",
     zajawka: typeof x.zajawka === "string" ? x.zajawka : "",
-
+    localizations: x.localizations && x.localizations.length > 0
+        ? x.localizations[0]
+        : null,
     banner: x.banner
       ? {
-          ...x.banner,
+          ...(x.banner as BannerType),
           alternativeText: x.banner.alternativeText ?? "",
         }
       : null,
@@ -37,12 +41,10 @@ const getPageData = async (
 ): Promise<DataExtended | null> => {
   try {
 
-  const internalHost = process.env.PRIVATE_STRAPI_URL || "http://localhost:1337";
-    
-    // 2. ADRES PUBLICZNY (dla Przeglądarki)
-    const publicHost = process.env.PUBLIC_STRAPI_URL || "http://localhost:1337";
+  const internalHost = process.env.PRIVATE_STRAPI_URL || vars.env.PRIVATE_STRAPI_URL;
+  
+    const publicHost = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL;
 
-    // Sklejamy URL do fetcha (używamy wewnętrznego!)
     const fetchPath = `${internalHost}${fetchUrl}`;
     const res = await fetch(fetchPath);
 

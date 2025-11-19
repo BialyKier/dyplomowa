@@ -1,7 +1,16 @@
 import { PageMenuItem } from "@/types/types";
+import vars from "@/vars/vars";
 
-const getMenuItems = async (fetchUrl: string)  => {
+type GetMenuItemsReturnType = PageMenuItem & { url: string; }
+
+const getMenuItems = async (locale:string | undefined) : Promise<GetMenuItemsReturnType[] | null> =>  {
   try {
+
+    locale = locale || vars.locale.pl;
+
+    const baseUrl = process.env.PRIVATE_STRAPI_URL || vars.env.PRIVATE_STRAPI_URL;
+
+  const fetchUrl = `${baseUrl}/api/pages?sort=pozycja:asc&locale=${locale}`;
     const res = await fetch(fetchUrl);
 
     if (!res.ok) {
@@ -16,7 +25,7 @@ const getMenuItems = async (fetchUrl: string)  => {
     return resItems.map((x) => {
       return {
         ...x,
-        url: x.slug === "home" ? "/" : `/${x.slug}`,
+        url: locale === vars.locale.en ? (x.slug === vars.slug.home ? `/${vars.slugprefix.en}` : `/${vars.slugprefix.en}/${x.slug}`) : (x.slug === vars.slug.home ? '/' : `/${x.slug}`),
       };
     });
   } catch (error) {

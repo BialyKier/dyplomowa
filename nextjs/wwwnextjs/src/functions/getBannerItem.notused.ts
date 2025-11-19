@@ -1,3 +1,5 @@
+import vars from "@/vars/vars";
+
 type GetBannerItemType = {
   data: [
     {
@@ -24,9 +26,7 @@ type BannerTypeComplete = {
 
 const getBannerItem = async (
   fetchUrl: string,
-  PUBLIC_URL: string = process.env.PUBLIC_STRAPI_URL ||
-    "http://localhost:1337" ||
-    "http://srv-strapi:1337"
+  PUBLIC_URL: string = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL,
 ): Promise<BannerTypeComplete | null> => {
   const res = await fetch(fetchUrl);
 

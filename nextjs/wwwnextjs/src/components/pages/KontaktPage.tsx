@@ -11,7 +11,9 @@ const {public_banner_url} = props.contentData.pageData.extended.banner;
       {banner && (
         <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
       )}
+  {tresc}
 
+      <div>{parse(tresc)}</div>
       <p>Strona Kontaktu</p>
       <p>Dane strony Kontakt:::: </p>
      

@@ -1,13 +1,13 @@
-import getMenuItems from "@/functions/getMenuItems";
-
-// import './globals.css';
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+import getMenuItems from "@/functions/getMenuItems";
 import { fetchPageData } from "@/functions/fetchPageData";
+import { getLanguageLinks } from "@/functions/getLanguageLinks";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,17 +33,17 @@ export default async function WebLayout({
 }>) {
 
   const { web } = await params;
-  const slug = web?.join("/") || "home";
+
+  // const slug = web?.join("/") || "home";
   
-  const contentData = await fetchPageData(slug);
+  const contentData = await fetchPageData(web);
 
+  const urlItems = await getMenuItems(contentData.pageLocale) || [];
 
-  const urlItems = await getMenuItems(`http://srv-strapi:1337/api/pages?sort=pozycja:asc`);
-
-  if (!urlItems) return null;
+  const langItems = getLanguageLinks(contentData?.pageData);
 
   return (
-    <html lang={contentData?.pageData.data.locale}>
+    <html lang={contentData.pageLocale}>
       <body>
         <Header menuItems={urlItems} />
       

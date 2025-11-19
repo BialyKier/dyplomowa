@@ -19,26 +19,45 @@ const WebPage = async ({params} : Readonly<{
 
 
    const { web } = await params;
-  const slug = web?.join("/") || "home";
- const contentData  = await fetchPageData(slug);
+  // const slug = web?.join("/") || "home";
+ const fetchedData  = await fetchPageData(web);
 
-  if (!contentData) return notFound();
+  if (!fetchedData) return notFound();
+  if(!fetchedData.pageData) return notFound();
 
   // map slug : component
   const componentMap: Record<string, React.FC<PagePropsType>> = {
+
+    // universal
+
     "home": HomePage,
     "blog": BlogPage,
+
+    // pl
+    
     "o-nas": OnasPage,
     "kontakt": KontaktPage,
+
+    // en
+
+    "about-us": OnasPage,
+    "contact": KontaktPage
   };
 
-  const Component = contentData.pageType == "page" ? componentMap[slug] || GenericPage : PostTemplate;
+  
 
+  const Component = fetchedData.pageType == "page" ? componentMap[fetchedData.pageData.data.slug] || GenericPage : PostTemplate;
+
+
+  const propsForComponent = {
+      pageData: fetchedData.pageData,
+      pageType: fetchedData.pageType || "page" 
+  };
   return (
     <>
       
       <main>
-        <Component contentData={contentData}/>
+        <Component contentData={propsForComponent}/>
       </main>
       
     </>
