@@ -1,8 +1,9 @@
+import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
-import { useGetContent } from "../hooks/useGetContent";
 
-const PostTemplate = () => {
-  const { banner, tresc, tytul, public_banner_url, zajawka} = useGetContent();
+const PostTemplate = (props : PagePropsType) => {
+const {banner, tresc, tytul, zajawka } = props.contentData.pageData.data;
+const {public_banner_url} = props.contentData.pageData.extended.banner;
   return (
     <>
       <p>Post TEMPLATKA</p>

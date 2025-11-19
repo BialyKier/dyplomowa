@@ -29,7 +29,7 @@ export default function GlobalError({
             500 - Krytyczny błąd serwera
           </h2>
           <p style={{ marginBottom: '2rem', color: '#666' }}>
-            Nie udało się załadować głównego szablonu strony. Prawdopodobnie backend (Strapi) jest niedostępny.
+            Nie udało się załadować głównego szablonu strony. Prawdopodobnie backend (Strapi) jest niedostępny. OUT
           </p>
           <button
             onClick={() => reset()}

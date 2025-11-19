@@ -1,8 +1,10 @@
+import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
-import { useGetContent } from "../hooks/useGetContent";
+import parse from "html-react-parser";
 
-const KontaktPage = () => {
-  const { banner, tresc, tytul, public_banner_url } = useGetContent();
+const KontaktPage = (props : PagePropsType) => {
+  const {banner, tresc, tytul } = props.contentData.pageData.data;
+const {public_banner_url} = props.contentData.pageData.extended.banner;
 
   return (
     <>
@@ -13,7 +15,7 @@ const KontaktPage = () => {
       <p>Strona Kontaktu</p>
       <p>Dane strony Kontakt:::: </p>
      
-      {tresc}
+      {parse(tresc)}
     </>
   );
 };

@@ -138,6 +138,7 @@ export type PageDataType = {
     zajawka?: string,
     tresc: string,
     pozycja: number,
+    locale: string,
     banner: BannerType | null,
 }
 
@@ -156,3 +157,5 @@ export type GetPageDataOutType = {
 }
 
 export type DataExtended = GetPageDataOutType & ExtendUrlType & {}
+
+export type PagePropsType = {contentData:{pageData: DataExtended; pageType: ContentPageTypeType;}}

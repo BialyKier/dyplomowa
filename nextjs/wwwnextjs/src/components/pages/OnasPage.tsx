@@ -1,15 +1,18 @@
+import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
-import { useGetContent } from "../hooks/useGetContent";
+import parse from "html-react-parser";
+const OnasPage = (props : PagePropsType) => {
+//   const { banner, tresc, tytul, public_banner_url } = useGetContent();
 
-const OnasPage = () => {
-  const { banner, tresc, tytul, public_banner_url } = useGetContent();
+const {banner, tresc, tytul } = props.contentData.pageData.data;
+const {public_banner_url} = props.contentData.pageData.extended.banner;
   return (
     <>
       {banner && (
         <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
       )}
 
-      {tresc}
+      {parse(tresc)}
 
       <div>{/* {parse(tresc)} */}</div>
     </>

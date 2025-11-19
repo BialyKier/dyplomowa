@@ -1,5 +1,5 @@
-"use client";
-import React, { useContext } from "react";
+
+import React from "react";
 
 import HomePage from "@/components/pages/HomePage";
 import GenericPage from "@/components/pages/GenericPage";
@@ -8,33 +8,39 @@ import OnasPage from "@/components/pages/OnasPage";
 import KontaktPage from "@/components/pages/KontaktPage";
 import PostTemplate from "@/components/pages/PostTemplate";
 
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
+import { PagePropsType } from "@/types/types";
 
-import { SlugContext } from "@/components/providers/ProviderSlug";
-import { PageTypeContext } from "@/components/providers/ProviderContentPageType";
+import { notFound } from "next/navigation";
+import { fetchPageData } from "@/functions/fetchPageData";
 
-const WebPage = () => {
-  const slug = useContext(SlugContext);
-  const ctype = useContext(PageTypeContext);
+const WebPage = async ({params} : Readonly<{
+  params: Promise<{ web?: string[] }>;
+}>) => {
+
+
+   const { web } = await params;
+  const slug = web?.join("/") || "home";
+ const contentData  = await fetchPageData(slug);
+
+  if (!contentData) return notFound();
 
   // map slug : component
-  const componentMap: Record<string, React.FC> = {
+  const componentMap: Record<string, React.FC<PagePropsType>> = {
     "home": HomePage,
     "blog": BlogPage,
     "o-nas": OnasPage,
     "kontakt": KontaktPage,
   };
 
-  const Component = ctype == "page" ? componentMap[slug] || GenericPage : PostTemplate;
+  const Component = contentData.pageType == "page" ? componentMap[slug] || GenericPage : PostTemplate;
 
   return (
     <>
-      <Header />
+      
       <main>
-        <Component />
+        <Component contentData={contentData}/>
       </main>
-      <Footer />
+      
     </>
   );
 };

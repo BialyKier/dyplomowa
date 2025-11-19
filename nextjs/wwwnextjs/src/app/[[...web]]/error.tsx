@@ -15,7 +15,7 @@ export default function Error({
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h2>Wystąpił błąd połączenia z serwerem.</h2>
+      <h2>Wystąpił błąd połączenia z serwerem. IN</h2>
       <p>Nie udało się pobrać treści strony.</p>
       <button
         onClick={() => reset()} // Próba ponownego załadowania
