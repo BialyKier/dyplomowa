@@ -64,6 +64,23 @@
       "options": {
         "preset": "defaultHtml"
       }
+    },
+    "template": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "default": "default",
+      "enum": [
+        "contact",
+        "blog",
+        "about",
+        "default",
+        "home"
+      ]
     }
   }
 }

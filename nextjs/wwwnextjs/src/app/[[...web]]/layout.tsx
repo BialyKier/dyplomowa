@@ -7,6 +7,8 @@ import Footer from "@/components/layout/Footer";
 import getMenuItems from "@/functions/getMenuItems";
 import { fetchPageData } from "@/functions/fetchPageData";
 import { getLanguageLinks } from "@/functions/getLanguageLinks";
+import vars from "@/vars/vars";
+import { readFromUrl } from "@/functions/readFromUrl";
 
 
 const geistSans = Geist({
@@ -36,16 +38,23 @@ export default async function WebLayout({
 
   // const slug = web?.join("/") || "home";
   
-  const contentData = await fetchPageData(web);
 
-  const urlItems = await getMenuItems(contentData.pageLocale) || [];
+const rfurl = readFromUrl(web);
+
+const [urlItems,contentData] = await Promise.all([
+ getMenuItems(rfurl.pageLocale),
+ fetchPageData(rfurl.pageSlug, rfurl.pageLocale)
+]);
+const urlItemsInsert = urlItems || [];
+
 
   const langItems = getLanguageLinks(contentData?.pageData);
 
+   
   return (
-    <html lang={contentData.pageLocale}>
+    <html lang={rfurl.pageLocale}>
       <body>
-        <Header menuItems={urlItems} />
+        <Header menuItems={urlItemsInsert} />
       
           {children}
         

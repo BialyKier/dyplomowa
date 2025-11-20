@@ -66,6 +66,19 @@
         "preset": "defaultHtml"
       },
       "required": false
+    },
+    "template": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "default": "default",
+      "enum": [
+        "default"
+      ]
     }
   }
 }

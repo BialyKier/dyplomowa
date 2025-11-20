@@ -12,47 +12,42 @@ import { PagePropsType } from "@/types/types";
 
 import { notFound } from "next/navigation";
 import { fetchPageData } from "@/functions/fetchPageData";
+import { readFromUrl } from "@/functions/readFromUrl";
 
 const WebPage = async ({params} : Readonly<{
   params: Promise<{ web?: string[] }>;
 }>) => {
 
-
    const { web } = await params;
   // const slug = web?.join("/") || "home";
- const fetchedData  = await fetchPageData(web);
+  const rfurl = readFromUrl(web);
+  const fetchedData  = await fetchPageData(rfurl.pageSlug, rfurl.pageLocale);
 
-  if (!fetchedData) return notFound();
-  if(!fetchedData.pageData) return notFound();
+  if(!fetchedData?.pageData) return notFound();
 
-  // map slug : component
-  const componentMap: Record<string, React.FC<PagePropsType>> = {
 
-    // universal
-
+  // map slug : page component
+  const componentMapPageTemplates: Record<string, React.FC<PagePropsType>> = {
     "home": HomePage,
     "blog": BlogPage,
-
-    // pl
-    
-    "o-nas": OnasPage,
-    "kontakt": KontaktPage,
-
-    // en
-
-    "about-us": OnasPage,
-    "contact": KontaktPage
+    "about": OnasPage,
+    "contact": KontaktPage,
+    "default": GenericPage,
   };
 
-  
-
-  const Component = fetchedData.pageType == "page" ? componentMap[fetchedData.pageData.data.slug] || GenericPage : PostTemplate;
-
-
-  const propsForComponent = {
-      pageData: fetchedData.pageData,
-      pageType: fetchedData.pageType || "page" 
+  // map slug : post component
+  const componentMapPostTemplates: Record<string, React.FC<PagePropsType>> = {
+    "default": PostTemplate,
   };
+
+  const layout = fetchedData?.pageData.data.template || "default";
+
+  const Component = fetchedData.pageType == "page" ? componentMapPageTemplates[layout] || GenericPage :
+                                                     componentMapPostTemplates[layout] || PostTemplate;
+
+
+  const propsForComponent = { pageData: fetchedData.pageData, pageType: fetchedData.pageType || "page" };
+
   return (
     <>
       

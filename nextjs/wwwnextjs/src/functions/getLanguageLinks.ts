@@ -1,6 +1,7 @@
 import { DataExtended } from "@/types/types";
 
 
+
 export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
 
     
@@ -18,13 +19,19 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
         links.pl = slug === 'home' ? '/' : `/${slug}`;
 
         if(localizations && localizations?.locale === 'en'){
-            links.en = slug === 'home' ? '/en' : `/en/${slug}`;
+            links.en = localizations.slug === 'home' ? '/en' : `/en/${localizations.slug}`;
         }
         
     }
 
     else if(locale === 'en') {
+        links.en = slug === 'home' ? '/en' : `/en/${slug}`;
 
+        if(localizations && localizations?.locale === 'pl'){
+            links.pl = localizations.slug === 'home' ? '/' : `/${localizations.slug}`;
+        }
     }
+
+    return links;
     
 }

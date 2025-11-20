@@ -5,7 +5,6 @@ export type PageMenuItem = {
   id: number;
   tytul: string;
   slug: string;
-  tresc: string;
   url: string;
 };
 
@@ -117,7 +116,8 @@ export type PageDataType = {
     pozycja: number,
     locale: string,
     banner: BannerType | null,
-    localizations: LocalizationsType | []
+    localizations: LocalizationsType | [],
+    template: string | null
 }
 
 export type PageDataValidatedType = Omit<PageDataType,'zajawka' | 'localizations'> & {
