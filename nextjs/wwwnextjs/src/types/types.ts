@@ -1,3 +1,5 @@
+import { pl } from "@/components/languages/pl";
+import { LanguageDefaultType } from "@/components/languages/types/types";
 
 
 
@@ -138,4 +140,12 @@ export type GetPageDataOutType = {
 
 export type DataExtended = GetPageDataOutType & ExtendUrlType & {}
 
-export type PagePropsType = {contentData:{pageData: DataExtended; pageType: ContentPageTypeType;}}
+export type PagePropsType = {contentData:{pageData: DataExtended, pageType: ContentPageTypeType, languageStatic:LanguageDefaultType}}
+
+
+
+
+export type SwitchLanguageType = {
+    pl: string,
+    en: string
+}

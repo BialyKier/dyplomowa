@@ -1,15 +1,15 @@
 import { PagePropsType } from "@/types/types";
-import parse from "html-react-parser";
+import DisplayParsedContent from "../utils/DisplayParsedContent";
 
 const BlogPage = (props : PagePropsType) => {
     const {banner, tresc, tytul } = props.contentData.pageData.data;
 const {public_banner_url} = props.contentData.pageData.extended.banner;
   return (
-    <>  {tresc}
+    <>  
     
-          <div>{parse(tresc)}</div>
+         <DisplayParsedContent content={tresc}/>
       <p>Strona Blog</p>
-      <p>Dane strony Blog:::: </p>
+      <p>Dane strony Blog:::: {props.contentData.languageStatic.common.error_404}</p>
     </>
   );
 };

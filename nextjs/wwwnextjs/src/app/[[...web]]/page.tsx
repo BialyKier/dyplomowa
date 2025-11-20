@@ -13,6 +13,7 @@ import { PagePropsType } from "@/types/types";
 import { notFound } from "next/navigation";
 import { fetchPageData } from "@/functions/fetchPageData";
 import { readFromUrl } from "@/functions/readFromUrl";
+import { getLanguageStatic } from "@/functions/getLanguageStatic";
 
 const WebPage = async ({params} : Readonly<{
   params: Promise<{ web?: string[] }>;
@@ -21,7 +22,15 @@ const WebPage = async ({params} : Readonly<{
    const { web } = await params;
   // const slug = web?.join("/") || "home";
   const rfurl = readFromUrl(web);
-  const fetchedData  = await fetchPageData(rfurl.pageSlug, rfurl.pageLocale);
+
+
+  const [fetchedData,languageStatic] = await Promise.all([
+    fetchPageData(rfurl.pageSlug, rfurl.pageLocale),
+    getLanguageStatic(rfurl.pageLocale),
+  ])
+
+
+  // const fetchedData  = await fetchPageData(rfurl.pageSlug, rfurl.pageLocale);
 
   if(!fetchedData?.pageData) return notFound();
 
@@ -46,7 +55,7 @@ const WebPage = async ({params} : Readonly<{
                                                      componentMapPostTemplates[layout] || PostTemplate;
 
 
-  const propsForComponent = { pageData: fetchedData.pageData, pageType: fetchedData.pageType || "page" };
+  const propsForComponent = { pageData: fetchedData.pageData, pageType: fetchedData.pageType || "page" , languageStatic};
 
   return (
     <>

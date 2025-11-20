@@ -9,6 +9,7 @@ import { fetchPageData } from "@/functions/fetchPageData";
 import { getLanguageLinks } from "@/functions/getLanguageLinks";
 import vars from "@/vars/vars";
 import { readFromUrl } from "@/functions/readFromUrl";
+import { SwitchLanguageType } from "@/types/types";
 
 
 const geistSans = Geist({
@@ -48,13 +49,13 @@ const [urlItems,contentData] = await Promise.all([
 const urlItemsInsert = urlItems || [];
 
 
-  const langItems = getLanguageLinks(contentData?.pageData);
+  const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData);
 
    
   return (
     <html lang={rfurl.pageLocale}>
       <body>
-        <Header menuItems={urlItemsInsert} />
+        <Header menuItems={urlItemsInsert} langItems={langItemsInsert} />
       
           {children}
         

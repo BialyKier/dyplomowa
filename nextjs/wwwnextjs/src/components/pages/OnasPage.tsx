@@ -1,6 +1,7 @@
 import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
-import parse from "html-react-parser";
+import DisplayParsedContent from "../utils/DisplayParsedContent";
+// import parse from "html-react-parser";
 const OnasPage = (props : PagePropsType) => {
 //   const { banner, tresc, tytul, public_banner_url } = useGetContent();
 
@@ -12,9 +13,11 @@ const {public_banner_url} = props.contentData.pageData.extended.banner;
         <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
       )}
 
-      {parse(tresc)}
+       <DisplayParsedContent content={tresc}/>
+       <p>{props.contentData.languageStatic.common.read_more}</p>
+ 
 
-      <div>{/* {parse(tresc)} */}</div>
+      
     </>
   );
 };
