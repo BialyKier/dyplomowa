@@ -18,7 +18,8 @@ const vars ={
     },
     slug:{
         home:'home',
-    }
+    },
+    revalidateTime: 10,
 }
 
 

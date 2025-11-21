@@ -15,18 +15,30 @@ import { fetchPageData } from "@/functions/fetchPageData";
 import { readFromUrl } from "@/functions/readFromUrl";
 import { getLanguageStatic } from "@/functions/getLanguageStatic";
 
+
+
+
 const WebPage = async ({params} : Readonly<{
-  params: Promise<{ web?: string[] }>;
+  params: Promise<{ web?: string[],
+    lang: string
+   }>;
 }>) => {
 
-   const { web } = await params;
+   const { web, lang } = await params;
+
+
+   const pageSlug = web?.join('/') ?? 'home';
+
+
   // const slug = web?.join("/") || "home";
-  const rfurl = readFromUrl(web);
+  // const rfurl = readFromUrl(web, lang);
 
 
   const [fetchedData,languageStatic] = await Promise.all([
-    fetchPageData(rfurl.pageSlug, rfurl.pageLocale),
-    getLanguageStatic(rfurl.pageLocale),
+    // fetchPageData(rfurl.pageSlug, rfurl.pageLocale),
+    // getLanguageStatic(rfurl.pageLocale),
+        fetchPageData(pageSlug, lang),
+        getLanguageStatic(lang),
   ])
 
 

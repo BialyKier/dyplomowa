@@ -6,4 +6,3 @@ export type LanguageDefaultType = {
     }
 };
 
-;

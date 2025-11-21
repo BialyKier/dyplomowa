@@ -46,7 +46,7 @@ const getPageData = async (
     const publicHost = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL;
 
     const fetchPath = `${internalHost}${fetchUrl}`;
-    const res = await fetch(fetchPath);
+    const res = await fetch(fetchPath, { next: { revalidate: vars.revalidateTime } });
 
     if (!res.ok) return null;
 

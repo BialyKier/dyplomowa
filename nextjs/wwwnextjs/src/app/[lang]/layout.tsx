@@ -1,7 +1,9 @@
 // import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 
-import "./globals.css";
+import { cookies, headers } from "next/headers";
+import "../globals.css";
+import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -20,8 +22,20 @@ import "./globals.css";
 
 export default async function RootLayout({
   children,
+  params
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode,
+  params: Promise<{
+    lang: string
+  }>
 }>) {
-  return <>{children}</>;
+const { lang } = await params;
+// const insertLang = lang.split('-')[0];
+const insertLang = lang;
+
+  return <>
+  <html lang={insertLang}>
+      <body>{children}</body>
+      </html>
+      </>;
 }

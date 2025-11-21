@@ -10,8 +10,8 @@ images: {
      
          {
         protocol: 'http',
-        hostname: 'localhost', 
-        port: '1337',
+        hostname: 'cms.example', 
+        port: '',
         pathname: '/uploads/**',
       },
        {

@@ -6,7 +6,7 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
 
     
     const links = {
-        pl: "/",
+        pl: "/pl",
         en: "/en",
     };
 
@@ -16,7 +16,7 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
 
 
     if(locale === 'pl'){
-        links.pl = slug === 'home' ? '/' : `/${slug}`;
+        links.pl = slug === 'home' ? '/pl' : `/pl/${slug}`;
 
         if(localizations && localizations?.locale === 'en'){
             links.en = localizations.slug === 'home' ? '/en' : `/en/${localizations.slug}`;
@@ -28,7 +28,7 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
         links.en = slug === 'home' ? '/en' : `/en/${slug}`;
 
         if(localizations && localizations?.locale === 'pl'){
-            links.pl = localizations.slug === 'home' ? '/' : `/${localizations.slug}`;
+            links.pl = localizations.slug === 'home' ? '/pl' : `/pl/${localizations.slug}`;
         }
     }
 

@@ -12,12 +12,12 @@ services:
         ports:
             - "80:80"
             - "443:443"
-            - "1337:1337"
         volumes:
             - ./public_html:/var/www/html
             - ./ssl:/etc/ssl/dyplomowa:ro
         depends_on:
             - srv-strapi
+            - srv-nextjs
     srv-nextjs:
         container_name: srv-nextjs
         build:
@@ -31,6 +31,8 @@ services:
         environment:
             PUBLIC_STRAPI_URL: ${PUBLIC_STRAPI_URL}
             PRIVATE_STRAPI_URL: ${PRIVATE_STRAPI_URL}
+        depends_on:
+            - srv-strapi
     srv-strapi:
         container_name: srv-strapi
         build:

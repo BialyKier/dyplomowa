@@ -32,19 +32,23 @@ export default async function WebLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ web?: string[] }>;
+  params: Promise<{ web?: string[],
+    lang: string
+   }>;
 }>) {
 
-  const { web } = await params;
+ const { web, lang } = await params;
 
-  // const slug = web?.join("/") || "home";
-  
 
-const rfurl = readFromUrl(web);
+   const pageSlug = web?.join('/') ?? 'home';
+// const rfurl = readFromUrl(web, lang);
+// const fullPath = `${lang}/${contentSlug}`;
 
 const [urlItems,contentData] = await Promise.all([
- getMenuItems(rfurl.pageLocale),
- fetchPageData(rfurl.pageSlug, rfurl.pageLocale)
+//  getMenuItems(rfurl.pageLocale),
+//  fetchPageData(rfurl.pageSlug, rfurl.pageLocale)
+getMenuItems(lang),
+ fetchPageData(pageSlug, lang)
 ]);
 const urlItemsInsert = urlItems || [];
 
@@ -53,14 +57,12 @@ const urlItemsInsert = urlItems || [];
 
    
   return (
-    <html lang={rfurl.pageLocale}>
-      <body>
+    <>
         <Header menuItems={urlItemsInsert} langItems={langItemsInsert} />
       
           {children}
         
         <Footer />
-      </body>
-    </html>
+      </>
   );
 }

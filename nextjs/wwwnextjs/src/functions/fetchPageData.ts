@@ -1,24 +1,10 @@
 import { ContentPageTypeType, DataExtended } from "@/types/types";
 import getPageData from "./getPageData";
-import vars from "@/vars/vars";
+import { cache } from "react";
 
-export const fetchPageData = async (pageSlug: string, pageLocale: string) =>{
+export const fetchPageData = cache(async (pageSlug: string, pageLocale: string) =>{
 
-    // let pageLocale = vars.locale.pl;
-    // let pageSlug = vars.slug.home;
 
-    // if(webParams && webParams.length > 0){
-    //     if(webParams[0] === vars.slugprefix.en){
-    //         pageLocale = vars.locale.en;
-            
-    //         if(webParams.length > 1){
-    //             pageSlug = webParams.slice(1).join('/');
-    //         }
-    //     }
-    //     else{
-    //         pageSlug = webParams.join('/');
-    //     }
-    // }
 
     let pageData : DataExtended | null = null;
 
@@ -48,4 +34,4 @@ export const fetchPageData = async (pageSlug: string, pageLocale: string) =>{
         pageType,
         pageLocale
     }
-}
+});

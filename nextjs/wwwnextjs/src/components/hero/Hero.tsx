@@ -15,8 +15,8 @@ export default function Hero(props: HeroPropsType) {
           width={0}
           height={0}
           loading={"eager"}
-          unoptimized={true}
-        //   unoptimized={process.env.NODE_ENV === "development"}
+          //unoptimized={true}
+          unoptimized={process.env.NODE_ENV === "development"}
         />
       )}
       <div className="skeleton">

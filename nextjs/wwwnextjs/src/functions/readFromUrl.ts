@@ -1,6 +1,6 @@
 import vars from "@/vars/vars";
 
-export const readFromUrl = (webParams : string[] | undefined) => {
+export const readFromUrl = (webParams : string[] | undefined, lang: string) => {
     let pageLocale = vars.locale.pl;
     let pageSlug = vars.slug.home;
 
