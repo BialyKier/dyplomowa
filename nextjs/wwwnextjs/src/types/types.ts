@@ -125,7 +125,7 @@ export type PageDataType = {
 export type PageDataValidatedType = Omit<PageDataType,'zajawka' | 'localizations'> & {
 tresc: string,
 zajawka: string,
-localizations: LocalizationsObjectType | null
+localizations: LocalizationsType | null
 }
 
 export type GetPageDataInType = {
@@ -146,6 +146,7 @@ export type PagePropsType = {contentData:{pageData: DataExtended, pageType: Cont
 
 
 export type SwitchLanguageType = {
-    pl: string,
-    en: string
+    // pl: string,
+    // en: string
+    [key: string]: string,
 }

@@ -14,7 +14,7 @@ const vars ={
     },
     env:{
         PRIVATE_STRAPI_URL: 'http://srv-strapi:1337',
-        PUBLIC_STRAPI_URL:  'http://localhost:1337',
+        PUBLIC_STRAPI_URL:  'http://cms.localhost',
     },
     slug:{
         home:'home',

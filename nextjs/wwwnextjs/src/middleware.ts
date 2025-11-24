@@ -2,8 +2,8 @@
 
 export const RoutingConfig = {
   // 1. Języki
-  locales: ['pl', 'en'],
-  defaultLocale: 'pl',
+  locales: ['pl', 'en','fr'],
+  defaultLocale: 'en',
   cookieName: 'site-lang',
 
   // 2. Aplikacje Niezależne (Twoje "wyjątki" poza [lang])
@@ -28,66 +28,58 @@ export const RoutingConfig = {
 };
 
 
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
+import { NextResponse, NextRequest } from "next/server";
 import { match } from '@formatjs/intl-localematcher';
+import { getCachedLocales, setCachedLocales } from "./functions/nieuzywane/storage/storedCache";
+import { getAvailableLocales } from "./functions/nieuzywane/getAvailableLocales";
 import Negotiator from 'negotiator';
+import availableLocales from './config/locales.json';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  
+  // let currentLocales = getCachedLocales();
+  
+  // if (!currentLocales) {
+  //   console.log('cache PUSTY - POBIERAM - TEST');
+  //   const freshData = await getAvailableLocales();
+  //   setCachedLocales(freshData);
+  //   currentLocales = freshData;
+  // }
+  // const LOCALES = currentLocales && currentLocales.length > 0 ? currentLocales : RoutingConfig.locales;
+  const LOCALES = availableLocales.length > 0 ? availableLocales : RoutingConfig.locales;
 
-  // 1. IGNOROWANIE TECHNICZNYCH I WYJĄTKÓW (Forex)
+
+  const serializedLocales = JSON.stringify(LOCALES);
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-available-locales', serializedLocales);
+  
   if (RoutingConfig.technicalPaths.some((path) => pathname.startsWith(path))) return NextResponse.next();
   if (RoutingConfig.protectedPaths.some((path) => pathname.startsWith(path))) return NextResponse.next();
-
-  // ==============================================================
-  // 2. SPRAWDZENIE CZY MA PREFIKS (Główna Logika)
-  // ==============================================================
-  const hasLocalePrefix = RoutingConfig.locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  // Jeśli adres ma już poprawny prefiks (np. /pl, /en/o-nas) -> JEST OK.
-  if (hasLocalePrefix) {
-    return NextResponse.next();
-  }
-
-  // ==============================================================
-  // 3. OBSŁUGA BRAKU PREFIKSU (W tym strony głównej "/")
-  // ==============================================================
   
-  // Musimy ustalić, na jaki język PRZEKIEROWAĆ użytkownika.
+  const hasLocalePrefix = LOCALES.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
+  
+  if (hasLocalePrefix) { return NextResponse.next({ request: { headers: requestHeaders, }})}
+  
   let targetLocale = RoutingConfig.defaultLocale;
-
-  // A. Sprawdź Ciasteczko
+  
   const cookieLang = request.cookies.get(RoutingConfig.cookieName)?.value;
-  if (cookieLang && RoutingConfig.locales.includes(cookieLang)) {
-    targetLocale = cookieLang;
-  } 
-  // B. Jeśli brak ciasteczka -> Sprawdź Nagłówek (Browser Language)
-  else {
+  
+  if(cookieLang && LOCALES.includes(cookieLang)) { targetLocale = cookieLang } 
+  else{
     try {
       const headers = { 'accept-language': request.headers.get('accept-language') || '' };
       const languages = new Negotiator({ headers }).languages();
-      targetLocale = match(languages, RoutingConfig.locales, RoutingConfig.defaultLocale);
-    } catch (e) {}
+      targetLocale = match(languages, LOCALES, RoutingConfig.defaultLocale);
+    }
+    catch (error) {}
   }
-
-  // ==============================================================
-  // 4. WYKONANIE PRZEKIEROWANIA (Redirect)
-  // ==============================================================
-  // Zmieniamy adres w przeglądarce!
-  // /       -> /pl
-  // /o-nas  -> /pl/o-nas
   
   const newUrl = new URL(`/${targetLocale}${pathname}`, request.url);
   return NextResponse.redirect(newUrl);
 }
 
-export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
-};
+export const config = { matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'] };
 
 
 

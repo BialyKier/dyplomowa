@@ -2,16 +2,39 @@ import { LanguageDefaultType } from '@/components/languages/types/types';
 
 import 'server-only';
 
+const defaultLocale = 'en';
 
+type LocaleModule = {
+    [key: string]: LanguageDefaultType;
+};
 
-const languageStatic = {
-    pl: () => import('@/components/languages/pl').then(module => module.pl),
-    en: () => import('@/components/languages/en').then(module => module.en),
-}
-
-type AllowedLocalesType = keyof typeof languageStatic;
 export const getLanguageStatic = async (pageLocale: string) :Promise<LanguageDefaultType> =>{
-   
-    const load = languageStatic[pageLocale as AllowedLocalesType] || languageStatic.pl;
-    return load();
+
+    try{
+        const module = await import(`@/components/languages/${pageLocale}`) as LocaleModule;
+        if(module[pageLocale]){
+            return module[pageLocale];
+        }
+        throw Error('LANGUAGE_DICTIONARY_LOAD_MODULE_PHASE_1');
+
+    }
+    catch (initialError){
+
+        console.error(`Unable to load language dictionary: `, initialError);
+
+        try{
+            const module = await import(`@/components/languages/${defaultLocale}`) as LocaleModule;
+            if(module[defaultLocale]){
+                return module[defaultLocale];
+            }
+            throw Error('LANGUAGE_DICTIONARY_DEFAULT_LOAD_MODULE_PHASE_2');
+        } catch (error){
+            console.error(`Unable to load default language dictionary: `, error);
+
+            throw Error('Unable to load language dictionary');
+        }
+        
+        
+    }
+    
 }

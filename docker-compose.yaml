@@ -31,8 +31,10 @@ services:
         environment:
             PUBLIC_STRAPI_URL: ${PUBLIC_STRAPI_URL}
             PRIVATE_STRAPI_URL: ${PRIVATE_STRAPI_URL}
+            REVALIDATION_TOKEN: ${REVALIDATION_TOKEN}
         depends_on:
-            - srv-strapi
+            srv-strapi:
+                condition: service_healthy
     srv-strapi:
         container_name: srv-strapi
         build:
@@ -51,6 +53,11 @@ services:
             DATABASE_PASSWORD: ${STRAPI_POSTGRES_PASSWORD}
         depends_on:
             - srv-strapi-db
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:1337/admin"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
     srv-strapi-db:
         container_name: ${STRAPI_DATABASE_HOST}
         build:
@@ -66,6 +73,12 @@ services:
             POSTGRES_DB: ${STRAPI_POSTGRES_DB}
             POSTGRES_USER: ${STRAPI_POSTGRES_USER}
             POSTGRES_PASSWORD: ${STRAPI_POSTGRES_PASSWORD}
+        healthcheck:
+            test: ["CMD", "pg_isready", "-U", "${STRAPI_POSTGRES_USER}", "-d", "${STRAPI_POSTGRES_DB}"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
 networks:
     net-public:
         driver: bridge

@@ -11,12 +11,39 @@ import PostTemplate from "@/components/pages/PostTemplate";
 import { PagePropsType } from "@/types/types";
 
 import { notFound } from "next/navigation";
-import { fetchPageData } from "@/functions/fetchPageData";
-import { readFromUrl } from "@/functions/readFromUrl";
+import { fetchPageData } from "@/functions/getPageData";
+import { readFromUrl } from "@/functions/nieuzywane/readFromUrl";
 import { getLanguageStatic } from "@/functions/getLanguageStatic";
+import vars from "@/vars/vars";
 
+import availableLocales from '../../../../src/config/locales.json'; // Dostosuj ścieżkę importu
+// Dodaj to na górze pliku:
+export const revalidate = 60; // Odświeżaj cache co 60 sekund (ISR)
+export const dynamicParams = true; // Pozwól na nowe strony spoza listy builda
+export async function generateStaticParams() {
+  // --- 1. Pobieranie danych (Twój sprawdzony Parallel Fetch) ---
+  const requests = availableLocales.map((lang) =>
+    fetch(
+      `http://cms.localhost/api/pages?locale=${lang}&pagination[pageSize]=100&fields[0]=slug&fields[1]=locale`,
+      { cache: 'no-store' }
+    ).then((res) => res.json())
+  );
 
+  const results = await Promise.all(requests);
+  const allPages = results.flatMap((res: { data: any }) => res.data || []);
 
+  // --- 2. Mapowanie (TUTAJ ZMIANA) ---
+  return allPages.map((page: any) => {
+    // Rozbijamy slug. Jeśli home -> pusta tablica []
+    const slugSegments = page.slug === 'home' ? [] : page.slug.split('/');
+
+    return {
+      // Osobno zwracamy język, osobno ścieżkę
+      lang: page.locale,      // Dla segmentu [lang]
+      web: slugSegments       // Dla segmentu [[...web]] (bez języka!)
+    };
+  });
+}
 
 const WebPage = async ({params} : Readonly<{
   params: Promise<{ web?: string[],
@@ -27,7 +54,8 @@ const WebPage = async ({params} : Readonly<{
    const { web, lang } = await params;
 
 
-   const pageSlug = web?.join('/') ?? 'home';
+  //  const pageSlug = web?.join('/') ?? 'home';
+  const pageSlug = web && web.length > 0 ? web.join('/') : 'home';
 
 
   // const slug = web?.join("/") || "home";

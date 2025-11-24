@@ -60,7 +60,7 @@ const getMenuItems = async (locale: string | undefined): Promise<GetMenuItemsRet
     // 1. Ustalenie języka (domyślnie pl, jeśli undefined)
     const currentLocale = locale || vars.locale.pl;
 
-    const baseUrl = process.env.PRIVATE_STRAPI_URL || vars.env.PRIVATE_STRAPI_URL;
+    const baseUrl = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL;
 
     // Budowanie query params
     const queryParams = [

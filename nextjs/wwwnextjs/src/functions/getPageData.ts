@@ -1,77 +1,37 @@
-import {
-  BannerType,
-  DataExtended,
-  GetPageDataInType,
-  PageDataType,
-  PageDataValidatedType,
-  PageMetaType,
-} from "@/types/types";
-import vars from "@/vars/vars";
+import { ContentPageTypeType, DataExtended } from "@/types/types";
+import getPageData from "./getValidatePageData";
+import { cache } from "react";
 
-const pageDataValidate = (x: PageDataType): PageDataValidatedType => {
-  return {
-    ...x,
-    tresc: x.tresc ?? "",
-    zajawka: typeof x.zajawka === "string" ? x.zajawka : "",
-    localizations: x.localizations && x.localizations.length > 0
-        ? x.localizations[0]
-        : null,
-    banner: x.banner
-      ? {
-          ...(x.banner as BannerType),
-          alternativeText: x.banner.alternativeText ?? "",
-        }
-      : null,
-  };
-};
+export const fetchPageData = cache(async (pageSlug: string, pageLocale: string) =>{
 
-const pageMetaValidate = (x: PageMetaType): PageMetaType => {
-  return {
-    pagination: x.pagination ?? {
-      page: 1,
-      pageSize: 25,
-      pageCount: 1,
-      total: 1,
-    },
-  };
-};
 
-const getPageData = async (
-  fetchUrl: string,
-): Promise<DataExtended | null> => {
-  try {
 
-  const internalHost = process.env.PRIVATE_STRAPI_URL || vars.env.PRIVATE_STRAPI_URL;
+    let pageData : DataExtended | null = null;
+
   
-    const publicHost = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL;
 
-    const fetchPath = `${internalHost}${fetchUrl}`;
-    const res = await fetch(fetchPath, { next: { revalidate: vars.revalidateTime } });
+    let pageType: ContentPageTypeType = "page";
 
-    if (!res.ok) return null;
+  
+    const reqQuery = `filters[slug]=${pageSlug}&locale=${pageLocale}&populate=*`;
 
-    const resData: GetPageDataInType = await res.json();
+    const [pageRes, postRes] = await Promise.all([
+        getPageData(`/api/pages?${reqQuery}`),
+        getPageData(`/api/posts?${reqQuery}`)
+    ]);
 
-    if (!resData.data || resData.data.length === 0) return null;
+    if (pageRes) {
+        pageType = "page";
+        pageData = pageRes;
+    } else if (postRes) {
+        pageType = "post";
+        pageData = postRes;
+    }
 
-    const dataValidated = pageDataValidate(resData.data[0]);
-    const metaValidated = pageMetaValidate(resData.meta);
 
-    const public_banner_url = dataValidated.banner?.url
-      ? publicHost + dataValidated.banner?.url
-      : "";
-
-    const resDataExtended: DataExtended = {
-      data: dataValidated,
-      meta: metaValidated,
-      extended: { banner: { public_banner_url } },
-    };
-
-    return resDataExtended;
-  } catch (error) {
-    console.error("getPageData ERROR:", error);
-    throw error;
-  }
-};
-
-export default getPageData;
+    return{
+        pageData,
+        pageType,
+        pageLocale
+    }
+});

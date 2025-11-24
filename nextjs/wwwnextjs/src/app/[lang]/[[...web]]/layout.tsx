@@ -5,11 +5,17 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 import getMenuItems from "@/functions/getMenuItems";
-import { fetchPageData } from "@/functions/fetchPageData";
+import { fetchPageData } from "@/functions/getPageData";
 import { getLanguageLinks } from "@/functions/getLanguageLinks";
 import vars from "@/vars/vars";
-import { readFromUrl } from "@/functions/readFromUrl";
+import { readFromUrl } from "@/functions/nieuzywane/readFromUrl";
 import { SwitchLanguageType } from "@/types/types";
+import { RoutingConfig } from "@/middleware";
+// import { fetchLocales } from "@/components/lib/fetchLocales";
+import { getCachedLocales } from "@/functions/nieuzywane/storage/storedCache";
+import { headers } from "next/headers";
+// import { getLocales } from "@/components/lib/localesStore";
+
 
 
 const geistSans = Geist({
@@ -53,11 +59,34 @@ getMenuItems(lang),
 const urlItemsInsert = urlItems || [];
 
 
-  const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData);
+  const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData,RoutingConfig.locales);
+// const lc = fetchLocales();
+   const headersList = await headers();
+  
+  // Pobieramy nasz customowy nagłówek
+  const localesHeader = headersList.get('x-available-locales');
+  let availableLocales = null; // Domyślna wartość (Gdyby nagłówka nie było)
 
-   
+if (localesHeader) {
+    // 2. Zamieniamy STRING na TABLICĘ
+    try {
+        availableLocales = JSON.parse(localesHeader); 
+        // Teraz availableLocales to: ['pl', 'en', 'fr'] (Array)
+    } catch (e) {
+        console.error("Błąd parsowania:", e);
+    }
+}
   return (
     <>
+    {console.log('asvstart')}
+    {console.log(availableLocales)}
+    {console.log('asvend')}
+    {/* {console.log('lc: '+lc)}
+    
+     {console.log(lc)} */}
+     {/* {console.log("moje Lokacje START")}
+     {console.log(getCachedLocales())}
+     {console.log("moje Lokacje END")} */}
         <Header menuItems={urlItemsInsert} langItems={langItemsInsert} />
       
           {children}

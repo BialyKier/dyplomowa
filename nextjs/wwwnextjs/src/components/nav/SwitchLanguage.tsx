@@ -7,12 +7,13 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 
 
-const SwitchLanguage = ({langItems } : {langItems:SwitchLanguageType | null | undefined}) =>{
+const SwitchLanguage = ({langItems } : {langItems:SwitchLanguageType}) =>{
 
-    const displayLinks = langItems || {
-        pl:`/pl`,
-        en:`/${vars.slugprefix.en}`
-    }
+    const displayLinks = langItems;
+    // || {
+    //     pl:`/pl`,
+    //     en:`/${vars.slugprefix.en}`
+    // }
 const handleLanguageChange = (lang: string) => {
     // Zapisujemy wybór na rok
     Cookies.set(RoutingConfig.cookieName, lang, { expires: 365 });
@@ -24,7 +25,7 @@ const handleLanguageChange = (lang: string) => {
         <span> | </span>
         <Link href={displayLinks.en}
               onClick={() => handleLanguageChange('en')}>EN</Link>
-    
+        
         
         </>
     )

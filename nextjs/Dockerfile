@@ -12,4 +12,5 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-CMD ["npm", "run", "dev"]
+ CMD ["npm", "run", "dev"]
+ #CMD ["npm", "start"]
