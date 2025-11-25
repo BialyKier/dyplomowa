@@ -3,7 +3,7 @@ import styles from "./hero.module.css";
 import Image from "next/image";
 
 export default function Hero(props: HeroPropsType) {
-  const { publicUrl, bannerData, tytul } = props;
+  const { publicUrl, bannerData, title } = props;
 
   return (
     <div role="banner" className="banner">
@@ -20,7 +20,7 @@ export default function Hero(props: HeroPropsType) {
         />
       )}
       <div className="skeleton">
-        <h1>{tytul}</h1>
+        <h1>{title}</h1>
       </div>
     </div>
   );

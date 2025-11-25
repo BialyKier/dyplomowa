@@ -15,7 +15,7 @@
     }
   },
   "attributes": {
-    "tytul": {
+    "title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -40,10 +40,9 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "tytul",
       "required": true
     },
-    "pozycja": {
+    "position": {
       "type": "integer",
       "pluginOptions": {
         "i18n": {
@@ -53,7 +52,7 @@
       "required": true,
       "unique": true
     },
-    "tresc": {
+    "content": {
       "type": "customField",
       "pluginOptions": {
         "i18n": {

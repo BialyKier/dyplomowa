@@ -3,19 +3,17 @@ import styles from "./topmenu.module.css";
 
 import { PageMenuItem } from "@/types/types";
 
-const TopMenu = ({menuItems}:{menuItems:PageMenuItem[]}) => {
-
+const TopMenu = ({ menuItems } : { menuItems: PageMenuItem[] }) => {
   return (
     <nav className={styles.topmenu}>
       <ul>
-        {menuItems.map((y) => (
-          <li key={y.id}>
-            <Link href={y.url}>{y.tytul}</Link>
+        {menuItems.map((x) => (
+          <li key={x.id}>
+            <Link href={x.url}>{x.title}</Link>
           </li>
         ))}
       </ul>
     </nav>
   );
 };
-
 export default TopMenu;

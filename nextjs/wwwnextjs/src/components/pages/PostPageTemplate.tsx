@@ -1,22 +1,22 @@
 import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
 import DisplayParsedContent from "../utils/DisplayParsedContent";
-const PostTemplate = (props : PagePropsType) => {
-const {banner, tresc, tytul, zajawka } = props.contentData.pageData.data;
+const PostTemplateTemplate = (props : PagePropsType) => {
+const {banner, content, title, excerpt } = props.contentData.pageData.data;
 const {public_banner_url} = props.contentData.pageData.extended.banner;
   return (
     <>
       <p>Post TEMPLATKA</p>
       {banner && (
-        <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
+        <Hero bannerData={banner} publicUrl={public_banner_url} title={title} />
       )}
 
      
       <p>{props.contentData.languageStatic.common.loading}</p>
-      <DisplayParsedContent content={tresc}/>
-      <DisplayParsedContent content={zajawka}/>
+     <DisplayParsedContent content={content}/>
+      <DisplayParsedContent content={excerpt}/>
     </>
   );
 };
 
-export default PostTemplate;
+export default PostTemplateTemplate;

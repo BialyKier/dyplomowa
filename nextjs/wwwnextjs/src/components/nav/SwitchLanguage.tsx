@@ -1,34 +1,32 @@
 
 'use client';
-import { RoutingConfig } from "@/middleware";
 import { SwitchLanguageType } from "@/types/types";
-import vars from "@/vars/vars";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import vars from "@/vars/vars";
 
+const { cookieName } = vars.const;
 
-const SwitchLanguage = ({langItems } : {langItems:SwitchLanguageType}) =>{
+const SwitchLanguage = ({ langItems } : { langItems: SwitchLanguageType }) =>{
+    
+    const languages = Object.entries(langItems).sort();
+    
+    const handleLanguageChange = (lang: string) => {
+        Cookies.set(cookieName, lang, { expires: 365 })
+    }
 
-    const displayLinks = langItems;
-    // || {
-    //     pl:`/pl`,
-    //     en:`/${vars.slugprefix.en}`
-    // }
-const handleLanguageChange = (lang: string) => {
-    // Zapisujemy wybór na rok
-    Cookies.set(RoutingConfig.cookieName, lang, { expires: 365 });
-  };
-    return(
+    return (
         <>
-        <Link href={displayLinks.pl}
-              onClick={() => handleLanguageChange('pl')}>PL</Link>
-        <span> | </span>
-        <Link href={displayLinks.en}
-              onClick={() => handleLanguageChange('en')}>EN</Link>
-        
-        
+            <ul style={{display:"flex", listStyleType:"unset"}}>
+                {languages.map( x => {
+                    return (
+                    <li key={x[0]} style={{padding:"0 10px", listStyleType:"none"}}>
+                        <Link href={x[1]} onClick={() => handleLanguageChange}>{x[0].toUpperCase()}</Link>
+                    </li>
+                    )
+                })}
+            </ul>
         </>
     )
 }
-
 export default SwitchLanguage;

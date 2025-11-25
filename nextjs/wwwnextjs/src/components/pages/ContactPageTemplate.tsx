@@ -3,18 +3,18 @@ import Hero from "../hero/Hero";
 import DisplayParsedContent from "../utils/DisplayParsedContent";
 
 
-const KontaktPage = (props : PagePropsType) => {
-  const {banner, tresc, tytul } = props.contentData.pageData.data;
+const ContactPageTemplate = (props : PagePropsType) => {
+  const {banner, content, title } = props.contentData.pageData.data;
 const {public_banner_url} = props.contentData.pageData.extended.banner;
 
   return (
     <>
       {banner && (
-        <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
+        <Hero bannerData={banner} publicUrl={public_banner_url} title={title} />
       )}
 
 
-      <DisplayParsedContent content={tresc}/>
+      <DisplayParsedContent content={content}/>
       <p>Strona Kontaktu</p>
       <p>Dane strony Kontakt:::: </p>
      
@@ -23,4 +23,4 @@ const {public_banner_url} = props.contentData.pageData.extended.banner;
   );
 };
 
-export default KontaktPage;
+export default ContactPageTemplate;

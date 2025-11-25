@@ -8,11 +8,13 @@ import {
 } from "@/types/types";
 import vars from "@/vars/vars";
 
+const { revalidateTime } = vars.const;
+
 const pageDataValidate = (x: PageDataType): PageDataValidatedType => {
   return {
     ...x,
-    tresc: x.tresc ?? "",
-    zajawka: typeof x.zajawka === "string" ? x.zajawka : "",
+    content: x.content ?? "",
+    excerpt: typeof x.excerpt === "string" ? x.excerpt : "",
     localizations: x.localizations && x.localizations.length > 0
         ? x.localizations
         : null,
@@ -36,17 +38,18 @@ const pageMetaValidate = (x: PageMetaType): PageMetaType => {
   };
 };
 
-const getPageData = async (
+const getValidatePageData = async (
   fetchUrl: string,
 ): Promise<DataExtended | null> => {
   try {
-
-  const internalHost = process.env.PRIVATE_STRAPI_URL || vars.env.PRIVATE_STRAPI_URL;
+    
+    const internalHost = process.env.PRIVATE_STRAPI_URL;
   
-    const publicHost = process.env.PUBLIC_STRAPI_URL || vars.env.PUBLIC_STRAPI_URL;
+    const publicHost = process.env.PUBLIC_STRAPI_URL;
 
-    const fetchPath = `${publicHost}${fetchUrl}`;
-    const res = await fetch(fetchPath, { next: { revalidate: vars.revalidateTime } });
+    const fetchPath = `${internalHost}${fetchUrl}`;
+
+    const res = await fetch(fetchPath, { next: { revalidate: revalidateTime } });
 
     if (!res.ok) return null;
 
@@ -72,6 +75,6 @@ const getPageData = async (
     console.error("getPageData ERROR:", error);
     throw error;
   }
-};
+}
 
-export default getPageData;
+export default getValidatePageData;

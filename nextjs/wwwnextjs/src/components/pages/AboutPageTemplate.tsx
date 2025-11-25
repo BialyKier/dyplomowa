@@ -5,15 +5,15 @@ import DisplayParsedContent from "../utils/DisplayParsedContent";
 const OnasPage = (props : PagePropsType) => {
 //   const { banner, tresc, tytul, public_banner_url } = useGetContent();
 
-const {banner, tresc, tytul } = props.contentData.pageData.data;
+const {banner, content, title } = props.contentData.pageData.data;
 const {public_banner_url} = props.contentData.pageData.extended.banner;
   return (
     <>
       {banner && (
-        <Hero bannerData={banner} publicUrl={public_banner_url} tytul={tytul} />
+        <Hero bannerData={banner} publicUrl={public_banner_url} title={title} />
       )}
 
-       <DisplayParsedContent content={tresc}/>
+       <DisplayParsedContent content={content}/>
        <p>{props.contentData.languageStatic.common.read_more}</p>
  
 

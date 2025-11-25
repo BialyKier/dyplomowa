@@ -1,53 +1,12 @@
-// import { DataExtended } from "@/types/types";
-
-
-
-// export const getLanguageLinks = (pageData: DataExtended | undefined | null) =>{
-
-    
-//     const links = {
-//         pl: "/pl",
-//         en: "/en",
-//     };
-
-//     if (!pageData?.data) return links;
-
-//     const { localizations, locale, slug } = pageData.data;
-
-
-//     if(locale === 'pl'){
-//         links.pl = slug === 'home' ? '/pl' : `/pl/${slug}`;
-
-//         if(localizations && localizations?.locale === 'en'){
-//             links.en = localizations.slug === 'home' ? '/en' : `/en/${localizations.slug}`;
-//         }
-        
-//     }
-
-//     else if(locale === 'en') {
-//         links.en = slug === 'home' ? '/en' : `/en/${slug}`;
-
-//         if(localizations && localizations?.locale === 'pl'){
-//             links.pl = localizations.slug === 'home' ? '/pl' : `/pl/${localizations.slug}`;
-//         }
-//     }
-
-//     return links;
-    
-// }
-
-
-
 import { DataExtended, SwitchLanguageType } from "@/types/types";
+import vars from "@/vars/vars";
 
-
+const { home } = vars.const.slug;
 
 const prepareLocalePathUrl = (locale: string, slug: string) : string => {
-    const path = slug === 'home' ? '/' : `/${slug}`;
+    const path = slug === home ? '/' : `/${slug}`;
     return `/${locale}${path}`;
 }
-
-
 
 export const getLanguageLinks = (pageData: DataExtended | undefined | null, availableLocales: string[]) : SwitchLanguageType =>{
     const links : Record<string, string> = {}; // pusty obiekt który na końcu zostanie zwrócony z kolekcją danych
@@ -55,7 +14,7 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null, avai
     // 0. jeśli nie dostaniemy obiektu z danymi, niech awaryjnie zostaną ustawione linki do stron domowych
     if(!pageData?.data){
         for(const x of availableLocales){
-            links[x] = prepareLocalePathUrl(x, 'home');
+            links[x] = prepareLocalePathUrl(x, home);
         }
         return links;
     }
@@ -80,7 +39,7 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null, avai
 
     for(const x of availableLocales){
         if(!links[x]){
-            links[x] = prepareLocalePathUrl(x,'home');
+            links[x] = prepareLocalePathUrl(x, home);
         }
     }
 

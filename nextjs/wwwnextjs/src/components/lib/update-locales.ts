@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 
-// Interfejsy
 interface StrapiLocale {
   id: number;
   name: string;
@@ -11,7 +10,7 @@ interface StrapiLocale {
   updatedAt: string;
 }
 
-const STRAPI_URL = process.env.PRIVATE_STRAPI_URL || 'http://srv-strapi:1337';
+const internalHost = process.env.PRIVATE_STRAPI_URL;
 
 async function updateLocales() {
   console.log('🌍 [Script] Start: Pobieranie języków ze Strapi...');
@@ -28,7 +27,7 @@ async function updateLocales() {
   console.log(`📂 Cel zapisu: ${configPath}`);
 
   try {
-    const response = await fetch(`${STRAPI_URL}/api/i18n/locales`);
+    const response = await fetch(`${internalHost}/api/i18n/locales`);
 
     if (!response.ok) {
       throw new Error(`Strapi API Error: ${response.status}`);

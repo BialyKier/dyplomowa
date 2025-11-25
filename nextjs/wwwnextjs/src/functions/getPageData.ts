@@ -1,37 +1,32 @@
-import { ContentPageTypeType, DataExtended } from "@/types/types";
-import getPageData from "./getValidatePageData";
+import { ContentPageOrPostType, DataExtended } from "@/types/types";
 import { cache } from "react";
+import getValidatePageData from "./getValidatePageData";
+import vars from "@/vars/vars";
 
-export const fetchPageData = cache(async (pageSlug: string, pageLocale: string) =>{
+const { page, post } = vars.const.pagetype;
 
-
-
+export const getPageData = cache(async (pageSlug: string, pageLocale: string) =>{
+    
     let pageData : DataExtended | null = null;
-
-  
-
-    let pageType: ContentPageTypeType = "page";
-
-  
+    let pageType: ContentPageOrPostType = page as ContentPageOrPostType;
     const reqQuery = `filters[slug]=${pageSlug}&locale=${pageLocale}&populate=*`;
-
+    
     const [pageRes, postRes] = await Promise.all([
-        getPageData(`/api/pages?${reqQuery}`),
-        getPageData(`/api/posts?${reqQuery}`)
+        getValidatePageData(`/api/pages?${reqQuery}`),
+        getValidatePageData(`/api/posts?${reqQuery}`)
     ]);
-
+    
     if (pageRes) {
-        pageType = "page";
+        pageType = page as ContentPageOrPostType;
         pageData = pageRes;
     } else if (postRes) {
-        pageType = "post";
+        pageType = post as ContentPageOrPostType;
         pageData = postRes;
     }
 
-
-    return{
+    return {
         pageData,
         pageType,
         pageLocale
     }
-});
+})

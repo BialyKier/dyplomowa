@@ -1,16 +1,15 @@
-import { pl } from "@/components/languages/pl";
 import { LanguageDefaultType } from "@/components/languages/types/types";
 
 
 
 export type PageMenuItem = {
   id: number;
-  tytul: string;
+  title: string;
   slug: string;
   url: string;
 };
 
-export type ContentPageTypeType = "page" | "post";
+export type ContentPageOrPostType = "page" | "post";
 
 
 
@@ -78,7 +77,7 @@ extended:{
 export type HeroPropsType = {
     publicUrl: string,
     bannerData: BannerType,
-    tytul: string
+    title: string
 }
 
 
@@ -92,10 +91,10 @@ export type LocalizationsObjectType =
         updatedAt: string,
         publishedAt: string,
         locale: string,
-        tytul: string,
+        title: string,
         slug: string,
-        pozycja:number,
-        tresc: string,
+        position:number,
+        content: string,
     }
 
     export type LocalizationsType = LocalizationsObjectType[]
@@ -111,20 +110,20 @@ export type PageDataType = {
     createdAt: string,
     updatedAt: string,
     publishedAt: string,
-    tytul: string,
+    title: string,
     slug: string,
-    zajawka?: string,
-    tresc: string | null,
-    pozycja: number,
+    excerpt?: string,
+    content: string | null,
+    position: number,
     locale: string,
     banner: BannerType | null,
     localizations: LocalizationsType | [],
     template: string | null
 }
 
-export type PageDataValidatedType = Omit<PageDataType,'zajawka' | 'localizations'> & {
-tresc: string,
-zajawka: string,
+export type PageDataValidatedType = Omit<PageDataType,'excerpt' | 'localizations'> & {
+content: string,
+excerpt: string,
 localizations: LocalizationsType | null
 }
 
@@ -140,7 +139,7 @@ export type GetPageDataOutType = {
 
 export type DataExtended = GetPageDataOutType & ExtendUrlType & {}
 
-export type PagePropsType = {contentData:{pageData: DataExtended, pageType: ContentPageTypeType, languageStatic:LanguageDefaultType}}
+export type PagePropsType = {contentData:{pageData: DataExtended, pageType: ContentPageOrPostType, languageStatic:LanguageDefaultType}}
 
 
 

@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  //  reactStrictMode: false,
+ output: "standalone",
+  env: {
+    PRIVATE_STRAPI_URL: process.env.PRIVATE_STRAPI_URL,
+    PUBLIC_STRAPI_URL: process.env.PUBLIC_STRAPI_URL,
+  },
 images: {
 
     remotePatterns: [
@@ -10,13 +13,13 @@ images: {
      
          {
         protocol: 'http',
-        hostname: 'cms.example', 
+        hostname: process.env.PUBLIC_STRAPI_URL!, 
         port: '',
         pathname: '/uploads/**',
       },
        {
         protocol: 'http',
-        hostname: 'srv-strapi', 
+        hostname: process.env.PRIVATE_STRAPI_URL!, 
         port: '1337',
         pathname: '/uploads/**',
       },

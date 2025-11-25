@@ -1,25 +1,29 @@
 const vars ={
-    locale:{
-        pl:'pl',
-        en:'en'
-    },
-    slugprefix:{
-        pl:'',
-        en:'en'
 
+    const:{
+        pagetype:{
+            page:'page',
+            post:'post'
+        },
+        slug:{
+            home:'home',
+        },
+        revalidateTime: 10,
+        defaultLocale: 'en',
+        cookieName: 'site-lang',
     },
-    pagetype:{
-        page:'page',
-        post:'post'
-    },
-    env:{
-        PRIVATE_STRAPI_URL: 'http://srv-strapi:1337',
-        PUBLIC_STRAPI_URL:  'http://cms.localhost',
-    },
-    slug:{
-        home:'home',
-    },
-    revalidateTime: 10,
+    protectedPaths: [
+    '/forex',
+    '/dashboard',
+    '/api' // API też tu pasuje
+    ],
+    technicalPaths: [
+    '/_next',
+    '/favicon.ico',
+    '/robots.txt',
+    '/sitemap.xml'
+    ],
+
 }
 
 
