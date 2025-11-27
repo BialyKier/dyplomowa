@@ -1,5 +1,5 @@
 {
-  "name": "wwwnextjs",
+  "name": "nextjs",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -7,7 +7,7 @@
     "preload": "tsx ./src/components/lib/update-locales.ts",
     "dev": "npm run preload && next dev --webpack",
     "build": "next build --webpack",
-    "start": "npm run preload && next start",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {

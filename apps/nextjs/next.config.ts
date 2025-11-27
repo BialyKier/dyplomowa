@@ -1,11 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
- output: "standalone",
-  env: {
-    PRIVATE_STRAPI_URL: process.env.PRIVATE_STRAPI_URL,
-    PUBLIC_STRAPI_URL: process.env.PUBLIC_STRAPI_URL,
-  },
+
 images: {
 
     remotePatterns: [
@@ -13,13 +9,17 @@ images: {
      
          {
         protocol: 'http',
-        hostname: process.env.PUBLIC_STRAPI_URL!, 
+        hostname: process.env.PUBLIC_STRAPI_URL 
+          ? new URL(process.env.PUBLIC_STRAPI_URL).hostname 
+          : 'localhost',
         port: '',
         pathname: '/uploads/**',
       },
        {
         protocol: 'http',
-        hostname: process.env.PRIVATE_STRAPI_URL!, 
+        hostname: process.env.PRIVATE_STRAPI_URL 
+          ? new URL(process.env.PRIVATE_STRAPI_URL).hostname 
+          : 'srv-strapi',
         port: '1337',
         pathname: '/uploads/**',
       },

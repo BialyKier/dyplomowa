@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { getPageData } from "@/functions/getPageData";
 import { getLanguageStatic } from "@/functions/getLanguageStatic";
 
-import availableLocales from '../../../../src/config/locales.json';
+import availableLocales from '../../../config/locales.json';
 
 import AboutPageTemplate from "@/components/pages/AboutPageTemplate";
 import HomePageTemplate from "@/components/pages/HomePageTemplate";
@@ -27,6 +27,10 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   
   const internalHost = process.env.PRIVATE_STRAPI_URL;
+  if (!internalHost) {
+    console.warn("⚠️ Build time: PRIVATE_STRAPI_URL not found. Skipping static generation.");
+    return [];
+  }
   
   const requests = availableLocales.map(async (lang) => 
     { 
