@@ -1,6 +1,16 @@
 #!/bin/bash
 
 
+# 1. Sprawdzamy, czy folder istnieje
+DB_DATA_DIR="./apps/database/dbstrapi/data"
+mkdir -p "$DB_DATA_DIR"
+
+# 2. Nadaj właścicielowi uprawnienia dla kontenera Postgres.
+# Użytkownik Postgres w Alpine ma domyślne ID 70.
+# NADANIE WŁAŚCICIELA (chown)
+sudo chown -R 70:70 "$DB_DATA_DIR"
+
+
 # 1. Build database container and run
 docker compose up -d srv-strapi-db
 

@@ -67,7 +67,8 @@ services:
         networks:
             - net-private
         volumes:
-            - ./apps/database/dbstrapi/data:/var/lib/postgresql/data
+            #- ./apps/database/dbstrapi/data:/var/lib/postgresql/data
+            - db-data:/var/lib/postgresql/data
             - ./apps/database/dbstrapi/backup:/backup
         environment:
             POSTGRES_DB: ${STRAPI_POSTGRES_DB}
@@ -84,3 +85,6 @@ networks:
         driver: bridge
     net-private:
         driver: bridge
+volumes:
+    db-data:
+        driver: local

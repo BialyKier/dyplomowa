@@ -1,4 +1,7 @@
-FROM node:22
+# FROM node:22
+FROM node:22-alpine
+
+RUN apk add libc6-compat
 
 RUN apt-get update && \
     apt-get install -y libvips && \
