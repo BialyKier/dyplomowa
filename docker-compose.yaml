@@ -14,7 +14,7 @@ services:
             - "443:443"
         volumes:
             - ./apps/public_html:/var/www/html
-            - ./apps/ssl:/etc/ssl/dyplomowa:ro
+            - ./ssl:/etc/ssl/dyplomowa:ro
         depends_on:
             - srv-strapi
             - srv-nextjs

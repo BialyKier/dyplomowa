@@ -15,8 +15,10 @@ else
 fi
 
 CERT_DIR_NAME="/certs"
-CERT_DIR_NAME_HOST="./apps/ssl"
+CERT_DIR_NAME_HOST="./ssl"
 
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
 
 if ! command -v docker; then
     echo "Docker nie jest zainstalowany"
@@ -29,13 +31,13 @@ mkdir -p "$CERT_DIR_NAME_HOST"
 
 echo "Trwa generowanie certyfikatu..."
 
-docker run --rm -v "$CERT_DIR_NAME_HOST:$CERT_DIR_NAME" -e CERT_DIR="$CERT_DIR_NAME" alpine sh -c '
+docker run --rm -v "$CERT_DIR_NAME_HOST:$CERT_DIR_NAME" -e CERT_DIR="$CERT_DIR_NAME" -e UID="$USER_ID" -e GID="$GROUP_ID" alpine sh -c '
 apk add --no-cache openssl && \
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout "$CERT_DIR/dyplomowa.key" \
     -out "$CERT_DIR/dyplomowa.crt" \
     -subj "/C=PL/ST=Mazowieckie/L=Warszawa/O=MojaFirma/OU=IT/CN=example.com" && \
-
+chown $UID:$GID "$CERT_DIR/dyplomowa.key" "$CERT_DIR/dyplomowa.crt" && \
 chmod 644 "$CERT_DIR/dyplomowa.key" "$CERT_DIR/dyplomowa.crt"
 '
 
