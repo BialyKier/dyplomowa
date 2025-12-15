@@ -43,6 +43,35 @@ npm run db:backup-restore
 
 echo "✅ Baza przywrócona (symulacja)."
 
+
+
+# Definicje ścieżek do aplikacji
+NEXTJS_DIR="./apps/nextjs"
+STRAPI_DIR="./apps/strapi/wwwstrapi" # Upewnij się, że tu jest package.json strapi
+
+# Funkcja pomocnicza do instalacji
+ensure_modules() {
+    local DIR=$1
+    local NAME=$2
+    
+    if [[ ! -d "$DIR/node_modules" ]]; then
+        echo -e "${YELLOW}📦 Brak node_modules dla $NAME. Instalacja...${NC}"
+        # Wchodzimy w podpowłokę (nawiasy), żeby cd nie zmieniło katalogu głównego skryptu
+        (cd "$DIR" && npm install --silent)
+        echo -e "${GREEN}✅ Zainstalowano zależności dla $NAME.${NC}"
+    else
+        echo -e "${GREEN}✅ Zależności dla $NAME już istnieją.${NC}"
+    fi
+}
+
+# Sprawdzamy Strapi
+ensure_modules "$STRAPI_DIR" "Strapi"
+
+# Sprawdzamy Next.js
+ensure_modules "$NEXTJS_DIR" "Next.js"
+
+
+
 docker compose up -d srv-strapi
 
 while [ "$(docker inspect -f '{{.State.Health.Status}}' srv-strapi 2>/dev/null)" != "healthy" ]; do
