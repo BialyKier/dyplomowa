@@ -9,6 +9,7 @@ import { getLanguageLinks } from "@/functions/getLanguageLinks";
 import { SwitchLanguageType } from "@/types/types";
 import { headers } from "next/headers";
 import { getPageData } from "@/functions/getPageData";
+import availableLocales from '../../../config/locales.json';
 
 import vars from "@/vars/vars";
 
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
 };
 
 const { home } = vars.const.slug;
+const { defaultLocale } = vars.const;
 
 export default async function WebLayout({ children, params }: Readonly<{ children: React.ReactNode, params: Promise<{ web?: string[], lang: string }>}>) {
   
@@ -44,20 +46,22 @@ export default async function WebLayout({ children, params }: Readonly<{ childre
   
   const urlItemsInsert = urlItems || [];
     
-  const headersList = await headers();
+  // const headersList = await headers();
   
-  const localesHeader = headersList.get('x-available-locales');
+  // const localesHeader = headersList.get('x-available-locales');
+    const insertAvailableLocales = availableLocales.length > 0 ? availableLocales : [defaultLocale];
+
   
-  let availableLocales : string[] = [];
+  // let availableLocales : string[] = [];
   
-  if (localesHeader) {
-    try {
-      availableLocales = JSON.parse(localesHeader);
-    } catch (error) {
-      console.error("Błąd parsowania:", error);
-    }
-  }
-    const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData,availableLocales);
+  // if (localesHeader) {
+  //   try {
+  //     availableLocales = JSON.parse(localesHeader);
+  //   } catch (error) {
+  //     console.error("Błąd parsowania:", error);
+  //   }
+  // }
+    const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData,insertAvailableLocales);
 
   return (
   <>

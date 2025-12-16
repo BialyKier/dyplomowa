@@ -2,6 +2,7 @@
 
 database/dbstrapi/data/
 
+apps/nextjs/src/config/locales.json
 
 # nextjs
 
