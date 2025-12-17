@@ -45,6 +45,7 @@ services:
             - net-public
             - net-private
         volumes:
+            - ./uploads:/app/public/uploads
             - ./apps/strapi:/app
         environment:
             DATABASE_HOST: ${STRAPI_DATABASE_HOST}

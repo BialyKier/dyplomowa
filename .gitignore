@@ -1,61 +1,67 @@
+node_modules
 
+.strapi
+.next
+.git
+.DS_Store
+.strapi-updater.json
+.strapi-cloud.json
 
-database/dbstrapi/data/
-
+database/dbstrapi/data
 apps/nextjs/src/config/locales.json
 
-# nextjs
+package-lock.json
 
-apps/nextjs/package-lock.json
-apps/nextjs/node_modules
-apps/nextjs/.next
-apps/nextjs/node_modules/*
+build
+dist
 
-# dependencies
-apps/nextjs/node_modules
-apps/nextjs/.pnp
-apps/nextjs/.pnp.*
-apps/nextjs/.yarn/*
-apps/nextjs/!.yarn/patches
-apps/nextjs/!.yarn/plugins
-apps/nextjs/!.yarn/releases
-apps/nextjs/!.yarn/versions
+license.txt
+exports
 
-# testing
-apps/nextjs/coverage
+*.tsbuildinfo
+next-env.d.ts
 
-# next.js
-apps/nextjs/.next/
-apps/nextjs/out/
+.vercel
 
-# production
-apps/nextjs/build
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# misc
-apps/nextjs/.DS_Store
-apps/nextjs/*.pem
-
-# debug
-apps/nextjs/npm-debug.log*
-apps/nextjs/yarn-debug.log*
-apps/nextjs/yarn-error.log*
-apps/nextjs/.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-apps/nextjs/.env*
-
-# vercel
-apps/nextjs/.vercel
-
-# typescript
-apps/nextjs/*.tsbuildinfo
-apps/nextjs/next-env.d.ts
+*.pem
 
 
 
-apps/strapi/node_modules
-apps/strapi/.strapi
-apps/strapi/build
-apps/strapi/dist
-apps/strapi/package-lock.json
-apps/strapi/node_modules/*
+lib-cov
+lcov.info
+pids
+logs
+results
+node_modules
+.node_history
+
+
+
+*.7z
+*.csv
+*.dat
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.seed
+*.so
+*.swo
+*.swp
+*.swn
+*.swm
+*.out
+*.pid
