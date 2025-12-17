@@ -12,8 +12,6 @@
 
     "clean": "docker system prune -a -f",
 
-
-    
     " --- TOOLS --- ": "",
 
     "ssl:generate": "bash ./scripts/ssl-generate.sh",
