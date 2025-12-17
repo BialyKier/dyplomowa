@@ -1,0 +1,61 @@
+
+
+database/dbstrapi/data/
+
+apps/nextjs/src/config/locales.json
+
+# nextjs
+
+apps/nextjs/package-lock.json
+apps/nextjs/node_modules
+apps/nextjs/.next
+apps/nextjs/node_modules/*
+
+# dependencies
+apps/nextjs/node_modules
+apps/nextjs/.pnp
+apps/nextjs/.pnp.*
+apps/nextjs/.yarn/*
+apps/nextjs/!.yarn/patches
+apps/nextjs/!.yarn/plugins
+apps/nextjs/!.yarn/releases
+apps/nextjs/!.yarn/versions
+
+# testing
+apps/nextjs/coverage
+
+# next.js
+apps/nextjs/.next/
+apps/nextjs/out/
+
+# production
+apps/nextjs/build
+
+# misc
+apps/nextjs/.DS_Store
+apps/nextjs/*.pem
+
+# debug
+apps/nextjs/npm-debug.log*
+apps/nextjs/yarn-debug.log*
+apps/nextjs/yarn-error.log*
+apps/nextjs/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+apps/nextjs/.env*
+
+# vercel
+apps/nextjs/.vercel
+
+# typescript
+apps/nextjs/*.tsbuildinfo
+apps/nextjs/next-env.d.ts
+
+
+
+apps/strapi/node_modules
+apps/strapi/.strapi
+apps/strapi/build
+apps/strapi/dist
+apps/strapi/package-lock.json
+apps/strapi/node_modules/*
