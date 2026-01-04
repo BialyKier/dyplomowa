@@ -47,6 +47,8 @@ services:
         volumes:
          - ./uploads:/app/public/uploads
         #     - ./apps/strapi:/app
+        env_file:
+            - ./apps/strapi/.env
         environment:
             DATABASE_HOST: ${STRAPI_DATABASE_HOST}
             DATABASE_NAME: ${STRAPI_POSTGRES_DB}
