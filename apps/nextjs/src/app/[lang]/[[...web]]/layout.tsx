@@ -45,29 +45,16 @@ export default async function WebLayout({ children, params }: Readonly<{ childre
   ]);
   
   const urlItemsInsert = urlItems || [];
-    
-  // const headersList = await headers();
   
-  // const localesHeader = headersList.get('x-available-locales');
-    const insertAvailableLocales = availableLocales.length > 0 ? availableLocales : [defaultLocale];
-
+  const insertAvailableLocales = availableLocales.length > 0 ? availableLocales : [defaultLocale];
   
-  // let availableLocales : string[] = [];
-  
-  // if (localesHeader) {
-  //   try {
-  //     availableLocales = JSON.parse(localesHeader);
-  //   } catch (error) {
-  //     console.error("Błąd parsowania:", error);
-  //   }
-  // }
-    const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData,insertAvailableLocales);
+  const langItemsInsert : SwitchLanguageType = getLanguageLinks(contentData?.pageData,insertAvailableLocales);
 
   return (
-  <>
-    <Header menuItems={urlItemsInsert} langItems={langItemsInsert} />
-      {children}
-    <Footer />
-  </>
+    <>
+      <Header menuItems={urlItemsInsert} langItems={langItemsInsert} />
+        {children}
+      <Footer />
+    </>
   )
 }

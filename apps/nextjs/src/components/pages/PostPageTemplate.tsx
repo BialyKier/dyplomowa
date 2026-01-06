@@ -1,9 +1,12 @@
 import { PagePropsType } from "@/types/types";
 import Hero from "../hero/Hero";
 import DisplayParsedContent from "../utils/DisplayParsedContent";
-const PostTemplateTemplate = (props : PagePropsType) => {
-const {banner, content, title, excerpt } = props.contentData.pageData.data;
-const {public_banner_url} = props.contentData.pageData.extended.banner;
+
+const PostPageTemplateTemplate = (props : PagePropsType) => {
+
+  const {banner, content, title, excerpt } = props.contentData.pageData.data;
+  const {public_banner_url} = props.contentData.pageData.extended.banner;
+
   return (
     <>
       <p>Post TEMPLATKA</p>
@@ -19,4 +22,4 @@ const {public_banner_url} = props.contentData.pageData.extended.banner;
   );
 };
 
-export default PostTemplateTemplate;
+export default PostPageTemplateTemplate;
