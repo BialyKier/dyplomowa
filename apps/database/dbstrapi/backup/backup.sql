@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict daMbjxrfJTzXXJzOgFk3NV5S1frPyt6Ee29hQ22GJ21G3CvTpJZaVrMnEjWlNjp
+\restrict sF4jSOZCgPkWrTSD2ytmjvjYtC43w7dDlh1JzDtgu8BrPHK8u0ERfXeJIsKKmI6
 
 -- Dumped from database version 15.15 (Debian 15.15-1.pgdg13+1)
 -- Dumped by pg_dump version 15.15 (Debian 15.15-1.pgdg13+1)
@@ -2315,10 +2315,10 @@ COPY public.pages (id, document_id, created_at, updated_at, published_at, create
 --
 
 COPY public.posts (id, document_id, slug, created_at, updated_at, published_at, created_by_id, updated_by_id, locale, template, title, excerpt, content) FROM stdin;
-1	npk8g1a8c4s03uqx7wy841z0	wpis-testowy	2025-11-16 14:54:17.478	2025-11-17 15:29:48.972	\N	1	1	en	\N	\N	\N	\N
 3	npk8g1a8c4s03uqx7wy841z0	wpis-testowy	2025-11-16 14:54:17.478	2025-11-17 15:29:48.972	2025-11-17 15:29:48.993	1	1	en	\N	\N	\N	\N
-4	npk8g1a8c4s03uqx7wy841z0	wpisx	2025-11-19 19:44:03.648	2025-12-17 18:52:49.802	\N	1	1	pl	default	Wpis blogowy numer jeden	<p>Tresć zajawki wpisu</p>	<p>Treść wpisu xd</p>
 37	npk8g1a8c4s03uqx7wy841z0	wpisx	2025-11-19 19:44:03.648	2025-12-17 18:52:49.802	2025-12-17 18:52:49.823	1	1	pl	default	Wpis blogowy numer jeden	<p>Tresć zajawki wpisu</p>	<p>Treść wpisu xd</p>
+1	npk8g1a8c4s03uqx7wy841z0	wpis-testowy	2025-11-16 14:54:17.478	2026-01-07 20:50:07.309	\N	1	1	en	default	Wpis testowy	<p>Zajawka wpisu testowego</p>	<p>Treść wpisu testowego</p>
+4	npk8g1a8c4s03uqx7wy841z0	wpis-testowy-pl	2025-11-19 19:44:03.648	2026-01-07 20:50:47.345	\N	1	1	pl	default	Wpis testowy	<p>Treść zajawki wpisu testowego PL</p>	<p>Treść wpisu testowego PL</p>
 \.
 
 
@@ -4758,5 +4758,5 @@ ALTER TABLE ONLY public.upload_folders
 -- PostgreSQL database dump complete
 --
 
-\unrestrict daMbjxrfJTzXXJzOgFk3NV5S1frPyt6Ee29hQ22GJ21G3CvTpJZaVrMnEjWlNjp
+\unrestrict sF4jSOZCgPkWrTSD2ytmjvjYtC43w7dDlh1JzDtgu8BrPHK8u0ERfXeJIsKKmI6
 
