@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict c4cS1ZvT5xnHlp6IxaOzycpupQBwbWbKExHfLWCC2UpGhhAD2dbHyAk7WvlNGox
+\restrict daMbjxrfJTzXXJzOgFk3NV5S1frPyt6Ee29hQ22GJ21G3CvTpJZaVrMnEjWlNjp
 
 -- Dumped from database version 15.15 (Debian 15.15-1.pgdg13+1)
 -- Dumped by pg_dump version 15.15 (Debian 15.15-1.pgdg13+1)
@@ -2271,10 +2271,10 @@ COPY public.files_related_mph (id, file_id, related_id, related_type, field, "or
 102	6	108	api::page.page	banner	1
 167	7	3	api::page.page	banner	1
 168	7	143	api::page.page	banner	1
-107	8	59	api::page.page	banner	1
-108	8	112	api::page.page	banner	1
-109	8	5	api::page.page	banner	1
-110	8	114	api::page.page	banner	1
+169	8	59	api::page.page	banner	1
+170	8	144	api::page.page	banner	1
+177	8	5	api::page.page	banner	1
+178	8	148	api::page.page	banner	1
 \.
 
 
@@ -2299,14 +2299,14 @@ COPY public.pages (id, document_id, created_at, updated_at, published_at, create
 107	pxrq4kxsvl80rl32yae9qx7v	2025-11-19 12:13:47.038	2026-01-06 19:45:16.349	2026-01-06 19:45:16.367	1	1	pl	home	home	Strona główna	1	<p>TREŚĆ STRONY GŁÓWNEJ PL</p>
 1	pxrq4kxsvl80rl32yae9qx7v	2025-11-04 12:52:51.648	2026-01-06 19:47:02.775	\N	1	1	en	home	home	Home	1	<p>HOME PAGE CONTENT</p>
 108	pxrq4kxsvl80rl32yae9qx7v	2025-11-04 12:52:51.648	2026-01-06 19:47:02.775	2026-01-06 19:47:02.797	1	1	en	home	home	Home	1	<p>HOME PAGE CONTENT</p>
-59	dfl0juk5kuczcqzv5qkmhe17	2025-11-19 12:15:06.259	2026-01-06 20:17:27.654	\N	1	1	pl	kontakt	contact	Kontakt	90	<p>TREŚĆ STRONY KONTAKT PL</p>
-112	dfl0juk5kuczcqzv5qkmhe17	2025-11-19 12:15:06.259	2026-01-06 20:17:27.654	2026-01-06 20:17:27.676	1	1	pl	kontakt	contact	Kontakt	90	<p>TREŚĆ STRONY KONTAKT PL</p>
-5	dfl0juk5kuczcqzv5qkmhe17	2025-11-04 12:53:43.608	2026-01-06 20:18:03.715	\N	1	1	en	contact	contact	Contact	90	<p>CONTACT PAGE CONTENT</p>
-114	dfl0juk5kuczcqzv5qkmhe17	2025-11-04 12:53:43.608	2026-01-06 20:18:03.715	2026-01-06 20:18:03.737	1	1	en	contact	contact	Contact	90	<p>CONTACT PAGE CONTENT</p>
 3	eeblm5zudy1kxcko88tb32y4	2025-11-04 12:53:25.032	2026-01-06 23:04:38.938	\N	1	1	en	about-us	about	About us	18	<div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/4_aa58bb2589.webp" alt="4.webp" srcset="https://cms.localhost/uploads/thumbnail_4_aa58bb2589.webp 245w,https://cms.localhost/uploads/small_4_aa58bb2589.webp 500w,https://cms.localhost/uploads/medium_4_aa58bb2589.webp 750w,https://cms.localhost/uploads/large_4_aa58bb2589.webp 1000w," sizes="100vw" width="2752" height="1536"></p><p>For many years, Smaczna Przystań Restaurant has been appreciated by those looking for fresh, homemade meals in a friendly atmosphere. Since the beginning, we have focused on simple, delicious cuisine and high-quality dishes, earning the trust of a wide range of customers.</p></div><div class="itembox-even"><p>We are conveniently located in the city, offering quick and easy access to delicious lunches. Every day, we prepare a varied menu based on proven recipes and ingredients from trusted suppliers.</p><p class="item-image"><img src="https://cms.localhost/uploads/1_restauracja_3bf038bb27.webp" alt="1-restauracja.webp" srcset="https://cms.localhost/uploads/thumbnail_1_restauracja_3bf038bb27.webp 245w,https://cms.localhost/uploads/small_1_restauracja_3bf038bb27.webp 500w,https://cms.localhost/uploads/medium_1_restauracja_3bf038bb27.webp 750w,https://cms.localhost/uploads/large_1_restauracja_3bf038bb27.webp 1000w," sizes="100vw" width="3006" height="1344"></p></div><div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/2_117507f6c0.webp" alt="2.webp" srcset="https://cms.localhost/uploads/thumbnail_2_117507f6c0.webp 245w,https://cms.localhost/uploads/small_2_117507f6c0.webp 500w,https://cms.localhost/uploads/medium_2_117507f6c0.webp 750w,https://cms.localhost/uploads/large_2_117507f6c0.webp 1000w," sizes="100vw" width="2784" height="1536"></p><p>Our greatest strength is our experienced and dedicated team, who ensure excellent taste, beautiful presentation, and friendly service.</p></div><div class="itembox-even"><p>The blend of traditional cuisine, care, and passion for cooking keeps our guests coming back with pleasure. We warmly invite you to visit us!</p><p class="item-image"><img src="https://cms.localhost/uploads/3_d509ea7a94.webp" alt="3.webp" srcset="https://cms.localhost/uploads/thumbnail_3_d509ea7a94.webp 245w,https://cms.localhost/uploads/small_3_d509ea7a94.webp 500w,https://cms.localhost/uploads/medium_3_d509ea7a94.webp 750w,https://cms.localhost/uploads/large_3_d509ea7a94.webp 1000w," sizes="100vw" width="2752" height="1536"></p></div>
 143	eeblm5zudy1kxcko88tb32y4	2025-11-04 12:53:25.032	2026-01-06 23:04:38.938	2026-01-06 23:04:38.956	1	1	en	about-us	about	About us	18	<div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/4_aa58bb2589.webp" alt="4.webp" srcset="https://cms.localhost/uploads/thumbnail_4_aa58bb2589.webp 245w,https://cms.localhost/uploads/small_4_aa58bb2589.webp 500w,https://cms.localhost/uploads/medium_4_aa58bb2589.webp 750w,https://cms.localhost/uploads/large_4_aa58bb2589.webp 1000w," sizes="100vw" width="2752" height="1536"></p><p>For many years, Smaczna Przystań Restaurant has been appreciated by those looking for fresh, homemade meals in a friendly atmosphere. Since the beginning, we have focused on simple, delicious cuisine and high-quality dishes, earning the trust of a wide range of customers.</p></div><div class="itembox-even"><p>We are conveniently located in the city, offering quick and easy access to delicious lunches. Every day, we prepare a varied menu based on proven recipes and ingredients from trusted suppliers.</p><p class="item-image"><img src="https://cms.localhost/uploads/1_restauracja_3bf038bb27.webp" alt="1-restauracja.webp" srcset="https://cms.localhost/uploads/thumbnail_1_restauracja_3bf038bb27.webp 245w,https://cms.localhost/uploads/small_1_restauracja_3bf038bb27.webp 500w,https://cms.localhost/uploads/medium_1_restauracja_3bf038bb27.webp 750w,https://cms.localhost/uploads/large_1_restauracja_3bf038bb27.webp 1000w," sizes="100vw" width="3006" height="1344"></p></div><div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/2_117507f6c0.webp" alt="2.webp" srcset="https://cms.localhost/uploads/thumbnail_2_117507f6c0.webp 245w,https://cms.localhost/uploads/small_2_117507f6c0.webp 500w,https://cms.localhost/uploads/medium_2_117507f6c0.webp 750w,https://cms.localhost/uploads/large_2_117507f6c0.webp 1000w," sizes="100vw" width="2784" height="1536"></p><p>Our greatest strength is our experienced and dedicated team, who ensure excellent taste, beautiful presentation, and friendly service.</p></div><div class="itembox-even"><p>The blend of traditional cuisine, care, and passion for cooking keeps our guests coming back with pleasure. We warmly invite you to visit us!</p><p class="item-image"><img src="https://cms.localhost/uploads/3_d509ea7a94.webp" alt="3.webp" srcset="https://cms.localhost/uploads/thumbnail_3_d509ea7a94.webp 245w,https://cms.localhost/uploads/small_3_d509ea7a94.webp 500w,https://cms.localhost/uploads/medium_3_d509ea7a94.webp 750w,https://cms.localhost/uploads/large_3_d509ea7a94.webp 1000w," sizes="100vw" width="2752" height="1536"></p></div>
 57	eeblm5zudy1kxcko88tb32y4	2025-11-19 12:14:36.996	2026-01-06 22:52:24.928	\N	1	1	pl	o-nas	about	O nas	10	<div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/4_aa58bb2589.webp" alt="4.webp" srcset="https://cms.localhost/uploads/thumbnail_4_aa58bb2589.webp 245w,https://cms.localhost/uploads/small_4_aa58bb2589.webp 500w,https://cms.localhost/uploads/medium_4_aa58bb2589.webp 750w,https://cms.localhost/uploads/large_4_aa58bb2589.webp 1000w," sizes="100vw" width="2752" height="1536"></p><p>Restauracja Smaczna Przystań od wielu lat cieszy się uznaniem wśród osób poszukujących świeżych, domowych posiłków w przyjaznej atmosferze. Od początku działalności stawiamy na prostą, smaczną kuchnię oraz wysoką jakość dań, dzięki czemu zdobyliśmy zaufanie szerokiego grona klientów.</p></div><div class="itembox-even"><p>Znajdujemy się w dogodnym punkcie miasta, oferując szybki i wygodny dostęp do pysznych obiadów. Każdego dnia przygotowujemy różnorodne menu, bazując na sprawdzonych recepturach oraz produktach od zaufanych dostawców.</p><p class="item-image"><img src="https://cms.localhost/uploads/1_restauracja_3bf038bb27.webp" alt="1-restauracja.webp" srcset="https://cms.localhost/uploads/thumbnail_1_restauracja_3bf038bb27.webp 245w,https://cms.localhost/uploads/small_1_restauracja_3bf038bb27.webp 500w,https://cms.localhost/uploads/medium_1_restauracja_3bf038bb27.webp 750w,https://cms.localhost/uploads/large_1_restauracja_3bf038bb27.webp 1000w," sizes="100vw" width="3006" height="1344"></p></div><div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/2_117507f6c0.webp" alt="2.webp" srcset="https://cms.localhost/uploads/thumbnail_2_117507f6c0.webp 245w,https://cms.localhost/uploads/small_2_117507f6c0.webp 500w,https://cms.localhost/uploads/medium_2_117507f6c0.webp 750w,https://cms.localhost/uploads/large_2_117507f6c0.webp 1000w," sizes="100vw" width="2784" height="1536"></p><p>Naszą największą siłą jest doświadczony i zaangażowany zespół, który dba o smak potraw, estetykę podania oraz miłą obsługę.</p></div><div class="itembox-even"><p>Połączenie tradycyjnej kuchni, staranności i pasji do gotowania sprawia, że nasi goście z przyjemnością do nas wracają. Serdecznie zapraszamy!</p><p class="item-image"><img src="https://cms.localhost/uploads/3_d509ea7a94.webp" alt="3.webp" srcset="https://cms.localhost/uploads/thumbnail_3_d509ea7a94.webp 245w,https://cms.localhost/uploads/small_3_d509ea7a94.webp 500w,https://cms.localhost/uploads/medium_3_d509ea7a94.webp 750w,https://cms.localhost/uploads/large_3_d509ea7a94.webp 1000w," sizes="100vw" width="2752" height="1536"></p></div>
 140	eeblm5zudy1kxcko88tb32y4	2025-11-19 12:14:36.996	2026-01-06 22:52:24.928	2026-01-06 22:52:24.954	1	1	pl	o-nas	about	O nas	10	<div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/4_aa58bb2589.webp" alt="4.webp" srcset="https://cms.localhost/uploads/thumbnail_4_aa58bb2589.webp 245w,https://cms.localhost/uploads/small_4_aa58bb2589.webp 500w,https://cms.localhost/uploads/medium_4_aa58bb2589.webp 750w,https://cms.localhost/uploads/large_4_aa58bb2589.webp 1000w," sizes="100vw" width="2752" height="1536"></p><p>Restauracja Smaczna Przystań od wielu lat cieszy się uznaniem wśród osób poszukujących świeżych, domowych posiłków w przyjaznej atmosferze. Od początku działalności stawiamy na prostą, smaczną kuchnię oraz wysoką jakość dań, dzięki czemu zdobyliśmy zaufanie szerokiego grona klientów.</p></div><div class="itembox-even"><p>Znajdujemy się w dogodnym punkcie miasta, oferując szybki i wygodny dostęp do pysznych obiadów. Każdego dnia przygotowujemy różnorodne menu, bazując na sprawdzonych recepturach oraz produktach od zaufanych dostawców.</p><p class="item-image"><img src="https://cms.localhost/uploads/1_restauracja_3bf038bb27.webp" alt="1-restauracja.webp" srcset="https://cms.localhost/uploads/thumbnail_1_restauracja_3bf038bb27.webp 245w,https://cms.localhost/uploads/small_1_restauracja_3bf038bb27.webp 500w,https://cms.localhost/uploads/medium_1_restauracja_3bf038bb27.webp 750w,https://cms.localhost/uploads/large_1_restauracja_3bf038bb27.webp 1000w," sizes="100vw" width="3006" height="1344"></p></div><div class="itembox"><p class="item-image"><img src="https://cms.localhost/uploads/2_117507f6c0.webp" alt="2.webp" srcset="https://cms.localhost/uploads/thumbnail_2_117507f6c0.webp 245w,https://cms.localhost/uploads/small_2_117507f6c0.webp 500w,https://cms.localhost/uploads/medium_2_117507f6c0.webp 750w,https://cms.localhost/uploads/large_2_117507f6c0.webp 1000w," sizes="100vw" width="2784" height="1536"></p><p>Naszą największą siłą jest doświadczony i zaangażowany zespół, który dba o smak potraw, estetykę podania oraz miłą obsługę.</p></div><div class="itembox-even"><p>Połączenie tradycyjnej kuchni, staranności i pasji do gotowania sprawia, że nasi goście z przyjemnością do nas wracają. Serdecznie zapraszamy!</p><p class="item-image"><img src="https://cms.localhost/uploads/3_d509ea7a94.webp" alt="3.webp" srcset="https://cms.localhost/uploads/thumbnail_3_d509ea7a94.webp 245w,https://cms.localhost/uploads/small_3_d509ea7a94.webp 500w,https://cms.localhost/uploads/medium_3_d509ea7a94.webp 750w,https://cms.localhost/uploads/large_3_d509ea7a94.webp 1000w," sizes="100vw" width="2752" height="1536"></p></div>
+59	dfl0juk5kuczcqzv5qkmhe17	2025-11-19 12:15:06.259	2026-01-07 20:26:06.672	\N	1	1	pl	kontakt	contact	Kontakt	90	<h2>Zapraszamy do kontaktu</h2><p>+48 123 456 789</p><p><a href="mailto:kontakt@smacznaprzystan.pl">kontakt@smacznaprzystan.pl</a></p><p>ul Lewartowskiego 17, 00-169 Warszawa</p><h2>Godziny Otwarcia</h2><p>Poniedziałek - Czwartek: 9.00 - 21.00</p><p>Piątek - Sobota: 9.00 - 23.00</p>
+144	dfl0juk5kuczcqzv5qkmhe17	2025-11-19 12:15:06.259	2026-01-07 20:26:06.672	2026-01-07 20:26:06.704	1	1	pl	kontakt	contact	Kontakt	90	<h2>Zapraszamy do kontaktu</h2><p>+48 123 456 789</p><p><a href="mailto:kontakt@smacznaprzystan.pl">kontakt@smacznaprzystan.pl</a></p><p>ul Lewartowskiego 17, 00-169 Warszawa</p><h2>Godziny Otwarcia</h2><p>Poniedziałek - Czwartek: 9.00 - 21.00</p><p>Piątek - Sobota: 9.00 - 23.00</p>
+148	dfl0juk5kuczcqzv5qkmhe17	2025-11-04 12:53:43.608	2026-01-07 20:31:51.203	2026-01-07 20:31:51.229	1	1	en	contact	contact	Contact	90	<h2>Feel free to contact us</h2><p>+48 123 456 789</p><p><a href="mailto:kontakt@smacznaprzystan.pl">kontakt@smacznaprzystan.pl</a></p><p>17 Lewartowskiego St. 00-169 Warsaw</p><h2>Opening Hours</h2><p>Monday - Thursday: 9.00 AM - 9.00 PM</p><p>Friday - Saturday: 9.00 AM - 11.00 PM</p>
+5	dfl0juk5kuczcqzv5qkmhe17	2025-11-04 12:53:43.608	2026-01-07 20:31:51.203	\N	1	1	en	contact	contact	Contact	90	<h2>Feel free to contact us</h2><p>+48 123 456 789</p><p><a href="mailto:kontakt@smacznaprzystan.pl">kontakt@smacznaprzystan.pl</a></p><p>17 Lewartowskiego St. 00-169 Warsaw</p><h2>Opening Hours</h2><p>Monday - Thursday: 9.00 AM - 9.00 PM</p><p>Friday - Saturday: 9.00 AM - 11.00 PM</p>
 \.
 
 
@@ -2520,6 +2520,7 @@ COPY public.strapi_sessions (id, document_id, user_id, session_id, child_id, dev
 150	v7zxllf9j6m6zv6pxfuoy9g5	1	ea7379962dc75bf6950d74532337b245	646e8906d954cd78ca4940ca1fdc9969	21114bc2-e22f-48bf-bdfe-7a36b09b9198	admin	2026-01-07 00:14:01.945	2026-02-05 17:03:04.831	rotated	session	2026-01-06 22:14:01.945	2026-01-06 22:14:02.217	2026-01-06 22:14:01.946	\N	\N	\N
 152	ln8gbajys2jy0d41qbdo2uiv	1	7090c71d3adc7281d4144bae2c238b63	\N	21114bc2-e22f-48bf-bdfe-7a36b09b9198	admin	2026-01-07 00:49:13.292	2026-02-05 17:03:04.831	active	session	2026-01-06 22:49:13.292	2026-01-06 22:49:13.292	2026-01-06 22:49:13.292	\N	\N	\N
 151	bgo3b9ca4rdkqp84z06stjxi	1	646e8906d954cd78ca4940ca1fdc9969	7090c71d3adc7281d4144bae2c238b63	21114bc2-e22f-48bf-bdfe-7a36b09b9198	admin	2026-01-07 00:14:02.201	2026-02-05 17:03:04.831	rotated	session	2026-01-06 22:14:02.202	2026-01-06 22:49:13.297	2026-01-06 22:14:02.202	\N	\N	\N
+153	uc8nugl3csgfu9kb7xjglqny	1	78e8360c61da4ef0388dddcb89835587	\N	21114bc2-e22f-48bf-bdfe-7a36b09b9198	admin	2026-01-07 22:22:40.347	2026-02-06 20:22:40.347	active	session	2026-01-07 20:22:40.348	2026-01-07 20:22:40.348	2026-01-07 20:22:40.35	\N	\N	\N
 \.
 
 
@@ -2763,7 +2764,7 @@ SELECT pg_catalog.setval('public.files_id_seq', 9, true);
 -- Name: files_related_mph_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.files_related_mph_id_seq', 168, true);
+SELECT pg_catalog.setval('public.files_related_mph_id_seq', 178, true);
 
 
 --
@@ -2777,7 +2778,7 @@ SELECT pg_catalog.setval('public.i18n_locale_id_seq', 38, true);
 -- Name: pages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.pages_id_seq', 143, true);
+SELECT pg_catalog.setval('public.pages_id_seq', 148, true);
 
 
 --
@@ -2875,7 +2876,7 @@ SELECT pg_catalog.setval('public.strapi_releases_id_seq', 1, false);
 -- Name: strapi_sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.strapi_sessions_id_seq', 152, true);
+SELECT pg_catalog.setval('public.strapi_sessions_id_seq', 153, true);
 
 
 --
@@ -4757,5 +4758,5 @@ ALTER TABLE ONLY public.upload_folders
 -- PostgreSQL database dump complete
 --
 
-\unrestrict c4cS1ZvT5xnHlp6IxaOzycpupQBwbWbKExHfLWCC2UpGhhAD2dbHyAk7WvlNGox
+\unrestrict daMbjxrfJTzXXJzOgFk3NV5S1frPyt6Ee29hQ22GJ21G3CvTpJZaVrMnEjWlNjp
 
