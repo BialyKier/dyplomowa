@@ -1,5 +1,9 @@
 # Praca Dyplomowa
 
+Paweł Cendrowski
+nr albumu 7386
+Warszawska Wyższa Szkoła Informatyki
+
 Temat: "Implementacja wydajnej aplikacji internetowej w środowisku kontenerowym"
 
 Zakres pracy:
