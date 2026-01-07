@@ -10,7 +10,9 @@ const AboutUsPageTemplate = (props : PagePropsType) => {
   return (
     <>
       {banner && (<Hero bannerData={banner} publicUrl={public_banner_url} title={title} />)}
-      <DisplayParsedContent content={content}/>
+      <article className="content">
+        <DisplayParsedContent content={content}/>
+      </article>
     </>
   );
 };

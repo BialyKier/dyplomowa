@@ -28,7 +28,7 @@ export async function generateStaticParams() {
   
   const internalHost = process.env.PRIVATE_STRAPI_URL;
   if (!internalHost) {
-    console.warn("⚠️ Build time: PRIVATE_STRAPI_URL not found. Skipping static generation.");
+    console.warn("PRIVATE_STRAPI_URL not found. Skipping static generation.");
     return [];
   }
   

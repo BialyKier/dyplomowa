@@ -28,7 +28,6 @@ export const getLanguageLinks = (pageData: DataExtended | undefined | null, avai
 
 
     // 2. ustanów linki dla tłumaczeń w znajdujących się w relacji z obecną stroną
-
     if(pageData.data.localizations &&
        Array.isArray(pageData.data.localizations) &&
        pageData.data.localizations.length > 0){

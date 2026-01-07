@@ -13,18 +13,12 @@ interface StrapiLocale {
 const internalHost = process.env.PRIVATE_STRAPI_URL;
 
 async function updateLocales() {
-  console.log('🌍 [Script] Start: Pobieranie języków ze Strapi...');
+  console.log('Fetching languages from Strapi in progress...');
 
-  // ---------------------------------------------------------
-  // KLUCZOWA ZMIANA PONIŻEJ:
-  // process.cwd() zwraca '/app' (root kontenera)
-  // Doklejamy do tego 'src/config'
-  // ---------------------------------------------------------
   const configDir = path.join(process.cwd(), 'src/config');
   const configPath = path.join(configDir, 'locales.json');
 
-  console.log(`📂 Katalog główny (CWD): ${process.cwd()}`);
-  console.log(`📂 Cel zapisu: ${configPath}`);
+  console.log(`Destination: ${configPath}`);
 
   try {
     const response = await fetch(`${internalHost}/api/i18n/locales`);
@@ -36,21 +30,21 @@ async function updateLocales() {
     const data = (await response.json()) as StrapiLocale[];
 
     if (!Array.isArray(data)) {
-      throw new Error('Otrzymano błędny format danych (nie jest tablicą).');
+      throw new Error('Invalid data format. Not an Array');
     }
 
     const locales = data.map((item) => item.code);
 
-    // Upewniamy się, że folder istnieje
+    // Czy istnieje folder
     if (!fs.existsSync(configDir)) {
       fs.mkdirSync(configDir, { recursive: true });
     }
 
     fs.writeFileSync(configPath, JSON.stringify(locales));
-    console.log(`✅ [Script] Sukces! Zapisano: ${JSON.stringify(locales)}`);
+    console.log(`Success! Saved: ${JSON.stringify(locales)}`);
 
   } catch (error) {
-    console.error('⚠️ [Script] Błąd pobierania języków:', error);
+    console.error('Failed to fetch languages:', error);
 
     // Fallback
     if (!fs.existsSync(configDir)) {
@@ -60,7 +54,7 @@ async function updateLocales() {
     if (!fs.existsSync(configPath)) {
       const fallback = ['pl', 'en'];
       fs.writeFileSync(configPath, JSON.stringify(fallback));
-      console.warn(`⚠️ [Script] Użyto fallbacku: ${JSON.stringify(fallback)}`);
+      console.warn(`Fallback applied: ${JSON.stringify(fallback)}`);
     }
   }
 }

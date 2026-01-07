@@ -1,5 +1,6 @@
 import { PagePropsType } from "@/types/types";
 import DisplayParsedContent from "../utils/DisplayParsedContent";
+import Hero from "../hero/Hero";
 
 const GenericPageTemplate = (props : PagePropsType) => {
   
@@ -8,10 +9,8 @@ const GenericPageTemplate = (props : PagePropsType) => {
   
   return (
     <> 
-    
-       <DisplayParsedContent content={content}/>
-      <p>Strona GENERYCZNA</p>
-      <p>Dane strony GENERYCZNEJ:::: </p>
+      {banner && (<Hero bannerData={banner} publicUrl={public_banner_url} title={title} />)}
+      <DisplayParsedContent content={content}/>
     </>
   );
 };

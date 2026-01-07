@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# DEPLOY DEV - AUTORUN
+
 handle_error() {
     echo ""
     echo -e "Error in line: $1. STOPPED"
@@ -14,16 +17,15 @@ else
     exit 1
 fi
 
-echo "Etap 1 - Sprawdzanie czy istnieje certyfikat SSL"
+echo "Stage 1 - Verifying SSL certificate"
 
 if [[ ! -f "./ssl/dyplomowa.crt" ]]; then
-    echo "Nie istnieją wystawione certyfikaty."
-    echo "Trwa generowanie nowego certyfikatu."
+    echo "No issued certificates found."
+    echo "A new certificate is being generated..."
     npm run ssl:generate
 fi
 
-
-echo "Etap 2 - Uruchomienie infrastruktury backendowej"
+echo "Stage 2 - Starting backend infrastructure"
 
 docker compose -f docker-compose.dev.yaml up -d srv-strapi-db
 
@@ -32,35 +34,28 @@ while [ "$(docker inspect -f '{{.State.Health.Status}}' srv-strapi-db 2>/dev/nul
     echo -n "."
 done
 
-echo "Baza danych:rekonstrukcja - proszę czekać..."
+echo "Database: Reconstructing - please wait..."
 npm run db:backup-restore
-echo "Baza danych:rekonstrukcja - gotowe"
-
-
+echo "Database: Reconstruction - done"
 
 NEXTJS_DIR="./apps/nextjs"
 STRAPI_DIR="./apps/strapi"
-
 
 ensure_modules() {
     local DIR=$1
     local NAME=$2
     
     if [[ ! -d "$DIR/node_modules" ]]; then
-        echo -e "${YELLOW}📦 Brak node_modules dla $NAME. Instalacja...${NC}"
+        echo -e "$NAME: node_modules not found. Installing packages..."
         (cd "$DIR" && npm install --silent)
-        echo -e "${GREEN}✅ Zainstalowano zależności dla $NAME.${NC}"
+        echo -e "$NAME: Dependencies installed."
     else
-        echo -e "${GREEN}✅ Zależności dla $NAME już istnieją.${NC}"
+        echo -e "$NAME: Dependencies already exist."
     fi
 }
 
-
 ensure_modules "$STRAPI_DIR" "Strapi"
-
 ensure_modules "$NEXTJS_DIR" "Next.js"
-
-
 
 docker compose -f docker-compose.dev.yaml up -d srv-strapi
 
@@ -72,6 +67,8 @@ done
 
 bash ./scripts/config-locales-preload.sh
 
+
+echo "Starting remaining program components..."
 docker compose -f docker-compose.dev.yaml up -d --build srv-nextjs srv-nginx
 
 

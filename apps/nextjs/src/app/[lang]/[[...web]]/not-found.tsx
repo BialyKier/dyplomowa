@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <div style={{
       fontFamily: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
-      height: 'calc(100vh - 200px)', // Odejmujemy wysokość nagłówka/stopki orientacyjnie, żeby było na środku
+      height: 'calc(100vh - 200px)', 
       textAlign: 'center',
       display: 'flex',
       flexDirection: 'column',
@@ -44,11 +44,9 @@ export default function NotFound() {
           </h2>
         </div>
       </div>
-      
-      {/* Opcjonalnie: Przycisk powrotu (w stylu pasującym do reszty) */}
       <div style={{ marginTop: '30px' }}>
         <Link href="/" style={{ fontSize: '14px', textDecoration: 'underline', color: '#666' }}>
-          Go back home
+          Back Home
         </Link>
       </div>
     </div>

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# DEPLOY PROD - AUTORUN
+
 handle_error() {
     echo ""
     echo -e "Error in line: $1. STOPPED"
@@ -14,21 +17,15 @@ else
     exit 1
 fi
 
-# if [[ ! -d "./uploads" ]]; then
-#     mkdir -p "./uploads"
-# fi
-
-echo "Etap 1 - Sprawdzanie czy istnieje certyfikat SSL"
+echo "Stage 1 - Verifying SSL certificate"
 
 if [[ ! -f "./ssl/dyplomowa.crt" ]]; then
-    echo "Nie istnieją wystawione certyfikaty."
-    echo "Trwa generowanie nowego certyfikatu."
+    echo "No issued certificates found."
+    echo "A new certificate is being generated..."
     npm run ssl:generate
 fi
 
-
-echo "Etap 2 - Uruchamienie infrastruktury backendowej"
-
+echo "Stage 2 - Starting backend infrastructure"
 
 docker compose -f docker-compose.prod.yaml up -d srv-strapi-db
 
@@ -37,9 +34,9 @@ while [ "$(docker inspect -f '{{.State.Health.Status}}' srv-strapi-db 2>/dev/nul
     echo -n "."
 done
 
-echo "Baza danych:rekonstrukcja - proszę czekać..."
+echo "Database: Reconstructing - please wait..."
 npm run db:backup-restore
-echo "Baza danych:rekonstrukcja - gotowe"
+echo "Database: Reconstruction - done"
 
 
 NEXTJS_DIR="./apps/nextjs"
@@ -57,7 +54,7 @@ done
 bash ./scripts/config-locales-preload.sh
 
 
-echo "Uruchamianie pozostałych komponentów programu"
+echo "Starting remaining program components..."
 docker compose -f docker-compose.prod.yaml up -d --build srv-nextjs srv-nginx
 
 

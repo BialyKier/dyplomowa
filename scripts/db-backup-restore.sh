@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# # Kolory dla czytelności w terminalu
-# RED='\033[0;31m'
-# GREEN='\033[0;32m'
-# BLUE='\033[0;34m'
-# NC='\033[0m' # No Color (Reset)
-
 # DATABASE RESTORE
 
 handle_error() {
@@ -34,15 +28,15 @@ BACKUP_FILE_PATH="./apps/database/dbstrapi/backup/backup.sql"
 # Czy istnieje plik backupu
 
 if [[ ! -f "$BACKUP_FILE_PATH" ]]; then
-    echo "Plik backupu bazy danych nie istnieje"
+    echo "The database backup file does not exist."
     exit 2
 fi
 
 # Czy istnieje uruchomiony kontener obsługujący bazę danych
 
 if [[ ! $(docker ps -q -f name=$CONTAINER_NAME) ]]; then
-    echo "Kontener obsługujący bazę danych nie jest obecnie uruchomiony"
-    echo "Możesz go uruchomić komendą: docker compose up -d srv-strapi-db"
+    echo "The database container is currently not running."
+    echo "You can run it using the following command: docker compose up -d srv-strapi-db"
     exit 3
 fi
 
@@ -61,8 +55,8 @@ docker exec -i $CONTAINER_NAME psql -U $DB_USER -d postgres -c "CREATE DATABASE 
 # Wypełnij bazę danymi backupu
 
 if docker exec -i $CONTAINER_NAME psql -U $DB_USER -d $DB_NAME < "$BACKUP_FILE_PATH" > /dev/null; then
-    echo "Przywracanie bazy zakończyło sie sukcesem!"
+    echo "Database restoration was successful!"
 else
-    echo "Przywracanie bazy zakończyło się fiaskiem!"
+    echo "Failed to restore the database!"
     exit 4
 fi

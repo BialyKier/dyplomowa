@@ -13,9 +13,8 @@ const vars ={
         cookieName: 'site-lang',
     },
     protectedPaths: [
-    '/forex',
     '/dashboard',
-    '/api' // API też tu pasuje
+    '/api'
     ],
     technicalPaths: [
     '/_next',

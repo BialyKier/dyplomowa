@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# SSL GENERATE
+
 handle_error() {
     echo ""
     echo -e "Error in line: $1. STOPPED"
@@ -21,15 +24,15 @@ USER_ID=$(id -u)
 GROUP_ID=$(id -g)
 
 if ! command -v docker; then
-    echo "Docker nie jest zainstalowany"
+    echo "Docker could not be found."
     exit 2
 fi
 
-echo "Trwa weryfikacja struktury katalogów miejsca docelowego..."
+echo "Verifying destination directory structure..."
 
 mkdir -p "$CERT_DIR_NAME_HOST"
 
-echo "Trwa generowanie certyfikatu..."
+echo "Certificate generation in progress..."
 
 docker run --rm -v "$CERT_DIR_NAME_HOST:$CERT_DIR_NAME" -e CERT_DIR="$CERT_DIR_NAME" -e UID="$USER_ID" -e GID="$GROUP_ID" alpine sh -c '
 apk add --no-cache openssl && \
@@ -43,5 +46,5 @@ chown $UID:$GID "$CERT_DIR/dyplomowa.key" "$CERT_DIR/dyplomowa.crt" && \
 chmod 644 "$CERT_DIR/dyplomowa.key" "$CERT_DIR/dyplomowa.crt"
 '
 
-echo "Wygenerowano pliki:"
+echo "Generated files:"
 ls -l "$CERT_DIR_NAME_HOST"

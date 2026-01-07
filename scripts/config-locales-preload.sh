@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# PRELOAD
+
 handle_error() {
     echo ""
     echo -e "Error in line: $1. STOPPED"

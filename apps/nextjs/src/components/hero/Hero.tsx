@@ -1,5 +1,4 @@
 import { HeroPropsType } from "@/types/types";
-import styles from "./hero.module.css";
 import Image from "next/image";
 
 export default function Hero(props: HeroPropsType) {
@@ -15,7 +14,6 @@ export default function Hero(props: HeroPropsType) {
           width={0}
           height={0}
           loading={"eager"}
-          //unoptimized={true}
           unoptimized={true}//{process.env.NODE_ENV === "development"}
         />
       )}

@@ -1,10 +1,6 @@
 #!/bin/bash
 
-
-# docker exec -it srv-strapi-db pg_dump -U admin -d dyplomowa_db_strapi > ./apps/database/dbstrapi/backup/backup.sql
-
-
-
+# DATABASE MAKE
 
 handle_error() {
     echo ""
@@ -27,20 +23,17 @@ DB_NAME="${STRAPI_POSTGRES_DB}" #"dyplomowa_db_strapi"
 
 BACKUP_FILE_PATH="./apps/database/dbstrapi/backup/backup.sql"
 
-
-
 if [[ ! $(docker ps -q -f name=$CONTAINER_NAME) ]]; then
-    echo "Kontener obsługujący bazę danych nie został włączony"
+    echo "The database container is not running."
     exit 1
 fi
 
 DIRS=$(dirname "$BACKUP_FILE_PATH")
 mkdir -p "$DIRS"
 
-
 if docker exec -i $CONTAINER_NAME pg_dump -U $DB_USER -d $DB_NAME > "$BACKUP_FILE_PATH"; then
-    echo "Backup bazy danych został wykonany"
+    echo "Database backup completed successfully."
     else
-    echo "Nie udało się wykonać backupu bazy danych"
+    echo "Failed to create database backup."
     exit 2
 fi

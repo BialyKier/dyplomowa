@@ -16,7 +16,7 @@ const PostPageTemplateTemplate = (props : PagePropsType) => {
 
      
       <p>{props.contentData.languageStatic.common.loading}</p>
-     <DisplayParsedContent content={content}/>
+      <DisplayParsedContent content={content}/>
       <DisplayParsedContent content={excerpt}/>
     </>
   );

@@ -1,4 +1,4 @@
-'use client'; // Global error musi być Client Component
+'use client';
 
 import { useEffect } from 'react';
 
@@ -10,7 +10,6 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Tutaj w przyszłości podepniesz Sentry / logowanie błędów
     console.error("Global Error:", error);
   }, [error]);
 
@@ -26,10 +25,10 @@ export default function GlobalError({
           fontFamily: 'sans-serif'
         }}>
           <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-            500 - Krytyczny błąd serwera
+           Critical Error 500
           </h2>
           <p style={{ marginBottom: '2rem', color: '#666' }}>
-            Nie udało się załadować głównego szablonu strony. Prawdopodobnie backend (Strapi) jest niedostępny. OUT
+            Failed to load the main page template.
           </p>
           <button
             onClick={() => reset()}
@@ -43,7 +42,7 @@ export default function GlobalError({
               fontSize: '1rem'
             }}
           >
-            Spróbuj ponownie
+            Try again
           </button>
         </div>
       </body>

@@ -8,11 +8,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint",
-
-
-        "config:locales-preload": "npx tsx ./src/components/lib/update-locales.ts"
-
+    "lint": "eslint"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.2",
