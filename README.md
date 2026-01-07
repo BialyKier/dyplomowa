@@ -31,3 +31,22 @@ Zakres pracy:
     "ssl:generate": "bash ./scripts/ssl-generate.sh",
     "db:backup-make": "bash ./scripts/db-backup-make.sh",
     "db:backup-restore": "bash ./scripts/db-backup-restore.sh"
+
+# Przykład:
+
+Uruchomienie:
+
+npm run deploy:prod
+
+Zatrzymanie:
+
+npm run stop:prod
+
+Czyszczenie:
+
+npm run clean
+
+
+# Informacja
+
+Uruchomienie skryptu deploy:dev lub deploy:prod wykonuje skrypt regenerujący bazę danych na podstawie pliku backup.sql zawartego w katalogu 'database/dbstrapi/backup/backup.sql'
