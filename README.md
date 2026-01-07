@@ -20,7 +20,7 @@ Zakres pracy:
 
 
 
-# Skrypty automatyczne
+## Skrypty automatyczne
 
 
     Uruchomienie projektu:
@@ -39,7 +39,7 @@ Zakres pracy:
     "db:backup-make": "bash ./scripts/db-backup-make.sh",
     "db:backup-restore": "bash ./scripts/db-backup-restore.sh"
 
-# Przykład:
+## Przykład:
 
 Uruchomienie:
 
@@ -54,6 +54,6 @@ Czyszczenie:
 npm run clean
 
 
-# Informacja
+## Informacja
 
 Uruchomienie skryptu deploy:dev lub deploy:prod wykonuje skrypt regenerujący bazę danych na podstawie pliku backup.sql zawartego w katalogu 'database/dbstrapi/backup/backup.sql'
