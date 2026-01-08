@@ -7,7 +7,7 @@ Album 7386
 Warszawska Wyższa Szkoła Informatyki
 
 
-## Temat: "Implementacja wydajnej aplikacji internetowej w środowisku kontenerowym"
+## Temat: "Implementacja aplikacji internetowej w środowisku kontenerowym"
 
 Zakres pracy:
 
